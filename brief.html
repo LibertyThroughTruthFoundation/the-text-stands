@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Text Stands ;  Brief 1.1</title>
+<style>
+:root{
+  --ink:#1a1a1a; --muted:#585450; --rule:#c8c1b6; --accent:#7a1f1f;
+  --wash:#f6f2ec; --paper:#fffdf9;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#e8e4dd;color:var(--ink);font-family:var(--serif);font-size:11.4pt;line-height:1.56}
+.wrap{max-width:47rem;margin:0 auto;background:var(--paper);padding:3.2rem 2.6rem 5rem}
+
+/* Cover */
+.cover{text-align:center;padding:5rem 0 4rem;border-bottom:1px solid var(--rule);margin-bottom:2.5rem}
+.cover .rule{width:64px;height:3px;background:var(--accent);margin:0 auto 2rem}
+.cover h1{font-family:var(--sans);font-weight:700;letter-spacing:.12em;font-size:2.05rem;margin:0 0 1rem;color:var(--ink)}
+.cover .subtitle{font-size:1.02rem;color:var(--muted);font-style:italic;max-width:34rem;margin:0 auto 2rem}
+.cover .meta{font-family:var(--sans);font-size:.82rem;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin:.35rem 0}
+.cover .org{font-family:var(--sans);font-size:.78rem;letter-spacing:.06em;color:var(--muted);margin-top:2rem}
+
+/* Contents */
+.contents h2{font-family:var(--sans);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--rule);padding-bottom:.5rem;margin:0 0 1.2rem}
+.contents ol{list-style:none;margin:0;padding:0;counter-reset:c}
+.contents li{counter-increment:c;padding:.34rem 0;border-bottom:1px dotted #d8d2c8;font-size:.98rem}
+.contents li::before{content:counter(c,decimal-leading-zero);font-family:var(--sans);font-size:.74rem;color:var(--accent);margin-right:1rem;letter-spacing:.05em}
+
+/* Sections */
+.section{margin-top:2.6rem}
+.section.pb{page-break-before:always}
+h2.sec{font-family:var(--sans);font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--rule);padding-bottom:.5rem;margin:0 0 1.1rem}
+h3{font-family:var(--sans);font-weight:700;font-size:1.02rem;margin:1.9rem 0 .5rem}
+h4{font-family:var(--sans);font-weight:600;font-size:.9rem;margin:1.4rem 0 .35rem;color:#33302c}
+p{margin:0 0 .85rem}
+.lead{font-size:1.06rem}
+strong{font-weight:700}
+em{font-style:italic}
+.small{font-size:.86rem;color:var(--muted)}
+
+/* Scripture */
+.scripture{margin:1.6rem 0;padding:.9rem 0 .9rem 1.2rem;border-left:3px solid var(--accent);background:linear-gradient(90deg,var(--wash),transparent)}
+.scripture p{font-style:italic;margin:0 0 .3rem}
+.scripture cite{font-family:var(--sans);font-style:normal;font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+
+/* Callout */
+.callout{border:1px solid var(--rule);border-left:4px solid var(--accent);background:var(--wash);padding:1.1rem 1.3rem;margin:1.6rem 0}
+.callout .lbl{font-family:var(--sans);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:.45rem}
+.callout p:last-child{margin-bottom:0}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;margin:1.4rem 0;font-size:.9rem}
+caption{caption-side:top;text-align:left;font-family:var(--sans);font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-bottom:.5rem}
+th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+thead th{font-family:var(--sans);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:#2c2a27;background:var(--wash);border-bottom:2px solid var(--accent)}
+tbody tr:nth-child(even){background:#fbf8f4}
+td.k{font-family:var(--sans);font-size:.78rem;color:var(--accent);white-space:nowrap}
+
+/* Grade tags */
+.tag{font-family:var(--sans);font-size:.68rem;letter-spacing:.06em;padding:.08rem .4rem;border-radius:2px;border:1px solid var(--rule);white-space:nowrap}
+.tag.iv{background:#f0f7f0;border-color:#9db89d;color:#2f542f}
+.tag.t{background:#faf6ec;border-color:#cbb98a;color:#6a5420}
+
+/* Exhibit plate */
+.plate{margin:1.6rem 0;border:1px solid var(--rule);background:var(--paper)}
+.plate img{display:block;width:100%;height:auto;max-height:8.2in;object-fit:contain}
+.plate .box{background:#eeeae2;height:8.5rem;display:flex;align-items:center;justify-content:center;color:#9a9388;font-family:var(--sans);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase}
+.plate figcaption{font-size:.82rem;color:var(--muted);padding:.7rem .8rem;border-top:1px solid var(--rule)}
+
+/* Verdict strip */
+.verdict{font-family:var(--sans);font-size:.86rem;border-top:2px solid var(--accent);padding-top:.6rem;margin-top:1.4rem}
+.verdict b{color:var(--accent);letter-spacing:.04em}
+
+@media print{
+  body{background:#fff;font-size:10.8pt}
+  .wrap{max-width:none;background:#fff;padding:0;margin:0}
+  .no-print{display:none!important}
+  .pb{page-break-before:always}
+  h2.sec,h3{break-after:avoid}
+  table,figure,.callout,.scripture{break-inside:avoid}
+  a{color:inherit;text-decoration:none}
+  tbody tr:nth-child(even){background:#fff}
+}
+@page{size:letter;margin:19mm 17mm}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="cover">
+  <div class="rule"></div>
+  <h1>THE TEXT STANDS</h1>
+  <p class="subtitle">A Response to &ldquo;25&nbsp;Theological Reasons To Consider Supernatural Bible Changes&rdquo;</p>
+  <div class="rule" style="width:40px;margin-top:1.6rem"></div>
+  <p class="meta">Brief 1.1 &nbsp;·&nbsp; Companion to the full response, v2.02</p>
+  <p class="meta">September 2026</p>
+  <p class="org">Liberty Through Truth Foundation</p>
+</header>
+
+<nav class="contents">
+  <h2>Contents</h2>
+  <ol>
+    <li>The Two Questions</li>
+    <li>Who Is Speaking</li>
+    <li>The Reader&rsquo;s Contract</li>
+    <li>What This Is Not</li>
+    <li>Where the Document Is Right</li>
+    <li>The Single Argument</li>
+    <li>The Nine Failure Modes</li>
+    <li>The Anatomy of a Real Change</li>
+    <li>The Survey</li>
+    <li>The Test the Document Cannot Pass</li>
+    <li>The Positive Case</li>
+    <li>The Verdict</li>
+  </ol>
+</nav>
+
+<section class="section pb">
+  <h2 class="sec">1 &middot; The Two Questions</h2>
+  <p class="lead">Two questions are in play, and they are not the same question.</p>
+  <p>The first is <strong>theological</strong>: does Scripture teach, or permit the inference, that God is now supernaturally altering Bibles?</p>
+  <p>The second is <strong>empirical</strong>: are Bibles demonstrably, physically, being altered?</p>
+  <p>The published document rests its theological case on the second question and never establishes it. The public argument now asserts it outright ;  that a survey of pastors proves the Bible is changing. This response answers both, each in its own currency, and it refuses to let one stand in for the other. A theological answer does not settle an empirical claim, and a headcount does not settle a theological one.</p>
+  <div class="callout">
+    <span class="lbl">Source under review</span>
+    <p><em>25 Theological Reasons To Consider Supernatural Bible Changes</em> (the 49-page theological brief circulating with that title). Hosted among the Educational Docs at <a href="https://alteredbible.com/educational-docs/">alteredbible.com/educational-docs</a>. The empirical claim now attached to that brief is the National Pastor Bible Quiz at <a href="https://alteredbible.com/survey/">alteredbible.com/survey</a>, fielded 13 October&ndash;12 December 2025, with the presenter&rsquo;s public assertion that the quiz proves the Bible is changing. This response answers the brief and the quiz. It does not answer the man.</p>
+  </div>
+
+  <div class="scripture">
+    <p>&ldquo;Prove all things; hold fast that which is good.&rdquo;</p>
+    <cite>1 Thessalonians 5:21 ;  the standard applied here, and the claimant&rsquo;s own</cite>
+  </div>
+</section>
+
+<section class="section pb">
+  <h2 class="sec">2 &middot; Who Is Speaking</h2>
+  <p>I once held the position under review. I taught that Scripture is being supernaturally altered, and I held a reading of the little season that ran alongside it. I have revised both, in public.</p>
+  <p>What I withdrew is the supernatural-changes thesis itself. What I revised ;  and still hold, in a disciplined form ;  is the little-season reading: I set aside an evidentiary layer that had leaned on timeline-revision and hidden history, and I corrected a scope-error. The deception of that season is directed at the nations&rsquo; allegiance (Revelation 20:3, 7&ndash;9). It was never a warrant for the corruption of the church&rsquo;s Scriptures.</p>
+  <p>So this is not an outsider&rsquo;s dismissal. It is a correction of a claim I once promoted, offered to the very audience that claim was offered to. If the door swings one way, it swings back; a framework can be left without a faith being lost.</p>
+</section>
+
+<section class="section pb">
+  <h2 class="sec">3 &middot; The Reader&rsquo;s Contract</h2>
+  <p>Three promises, made before the first claim is touched.</p>
+  <h4>Steelman</h4>
+  <p>Every claim is stated in its strongest form before it is answered ;  in the document&rsquo;s own words.</p>
+  <h4>Concede</h4>
+  <p>Every place the document is right is granted first, plainly, on the record.</p>
+  <h4>Criteria</h4>
+  <p>The tests by which this response could be shown wrong are stated in advance, including what would change my mind.</p>
+  <p>A refutation that cannot concede is a rant. This one leads with its concessions, and it names its own falsifiers, because a case that cannot lose cannot be trusted to win.</p>
+</section>
+
+<section class="section pb">
+  <h2 class="sec">4 &middot; What This Is Not</h2>
+  <p>It is not a defense of King-James-onlyism.</p>
+  <p>It is not a defense of a doctrine of verbal, plenary preservation.</p>
+  <p>It is not a defense of &ldquo;theological necessity&rdquo; ;  the argument that God would obviously not allow such a thing, and therefore has not. The document is right to reject that argument, and this response rejects it too.</p>
+  <p>It is not a claim that the church&rsquo;s traditions are innocent of proof-text abuse. On the contrary, one of the concessions below lands against a tradition this response otherwise shares.</p>
+  <p>It is not neutral. Its premises are stated early, so that the reader can audit the auditor.</p>
+</section>
+
+<section class="section pb">
+  <h2 class="sec">5 &middot; Where the Document Is Right</h2>
+  <p>Conceded first, without reservation.</p>
+
+  <h4>Psalm 12 does not promise the preservation of words</h4>
+  <p>In Psalm 12:7, &ldquo;them&rdquo; are the people of verses 1 and 5 ;  the godly, the poor, the needy. The Hebrew suffixes are masculine; the word for &ldquo;words&rdquo; is feminine. The Greek and Latin witnesses read &ldquo;us.&rdquo; The psalm promises that God will keep His people through a lying generation. It is not a promise about ink, and the tradition that pressed it into that service was wrong. The document is correct, and the careful commentators agree with it.</p>
+
+  <h4>Psalm 119:89 locates the word in heaven</h4>
+  <p>&ldquo;Forever, O Lord, thy word is settled in heaven.&rdquo; That is a statement about God&rsquo;s own counsel, not a warranty upon a printed page.</p>
+
+  <h4>&ldquo;Word&rdquo; and &ldquo;Bible&rdquo; are not synonyms</h4>
+  <p>&ldquo;In the beginning was the Word&rdquo; is not a sentence about a book. The document is right that the conflation is rampant, and right that it has done real damage.</p>
+
+  <h4>&ldquo;Theological necessity&rdquo; is inference dressed as doctrine</h4>
+  <p>The argument that God&rsquo;s character obliges Him to preserve a particular text is not read off the text. It is read into it. When it is taught as though it were Scripture, the commandment of men is taught as doctrine, and the document catches that.</p>
+
+  <h4>The school it refutes deserved refuting</h4>
+  <p>A strand of twentieth-century fundamentalism built a doctrine of preservation out of inference and then defended it as though it were written. Against that school, and on these points, the document largely succeeds.</p>
+
+  <h4>Bibliolatry is a real danger</h4>
+  <p>Treating a translation, an edition, or a mastery of the text as a substitute for living dependence is a genuine vice, and the Lord&rsquo;s own rebuke of those who searched the Scriptures and missed Him stands over it still (John 5:39).</p>
+
+  <div class="callout">
+    <span class="lbl">The distinction that matters</span>
+    <p>These concessions defeat one school ;  a recent, narrow doctrine of preservation. They do not defeat the standing case, which rests on entirely different ground: how Christ and the apostles actually used the text, and what the physical record of transmission actually shows. Those are named in Section&nbsp;11. The document wins a battle and claims a war.</p>
+  </div>
+</section>
+
+<section class="section pb">
+  <h2 class="sec">6 &middot; The Single Argument</h2>
+  <p>Nearly every one of the twenty-five reasons has the same shape.</p>
+  <p>Its premise: God is sovereign, and He has done analogous things before. Often true.</p>
+  <p>Its middle: therefore God <em>could</em> permit the alteration of Scripture. Valid, as a possibility.</p>
+  <p>Its conclusion: therefore He <em>is</em> doing it, and to doubt it is presumption.</p>
+  <p>The third step does not follow from the second. That is the whole of it. A permission is not a report. To move from <em>could</em> to <em>is</em>, one needs a text that says <em>does</em> ;  and across forty-nine pages, none is produced. Every claim inherits the same gap: the certainty is real, but the currency is possibilities.</p>
+  <p>The document does not make twenty-five arguments. It makes one argument twenty-five times.</p>
+</section>
+
+<section class="section pb">
+  <h2 class="sec">7 &middot; The Nine Failure Modes</h2>
+  <p>The twenty-five reasons do not require twenty-five separate refutations, because they recycle nine structural failures. Naming them once lets the reader recognize the shape wherever it recurs.</p>
+  <table>
+    <caption>The shared failure modes, with the code used in the full treatment</caption>
+    <thead><tr><th style="width:12%">Code</th><th style="width:30%">Name</th><th>In one sentence</th></tr></thead>
+    <tbody>
+      <tr><td class="k">F1</td><td>Modal Collapse</td><td>&ldquo;God can&rdquo; becomes &ldquo;God is,&rdquo; without a text that says &ldquo;God does.&rdquo;</td></tr>
+      <tr><td class="k">F2</td><td>Jurisdiction Gap</td><td>Silence about where a promise lands is read as a promise that it lands nowhere.</td></tr>
+      <tr><td class="k">F3</td><td>Category Inversion</td><td>Having forbidden the conflation of &ldquo;word&rdquo; with &ldquo;Bible,&rdquo; the document conflates its own categories ;  silence with corruption, administration with document, access with alteration.</td></tr>
+      <tr><td class="k">F4</td><td>The Unstated Modifier</td><td>Later texts are played as trump cards that never name the object they are said to override.</td></tr>
+      <tr><td class="k">F5</td><td>Precedent Stretching</td><td>Real judgments ;  of silence, of affliction, of confusion ;  are reassigned to a category no text attests: the editing of covenant documents.</td></tr>
+      <tr><td class="k">F6</td><td>Audience Evacuation</td><td>Time-markers are stripped of their first-century referents and relocated to &ldquo;probably right now.&rdquo;</td></tr>
+      <tr><td class="k">F7</td><td>Self-Referential Collapse</td><td>The method trusts the very faculty the document&rsquo;s own judgment-text calls deluded.</td></tr>
+      <tr><td class="k">F8</td><td>Burden Inversion</td><td>Absence of prohibition is treated as presence of promise, and the opponent is asked to prove a universal negative.</td></tr>
+      <tr><td class="k">F9</td><td>Sanction Inversion</td><td>A warning against tampering is read as a permission for it.</td></tr>
+    </tbody>
+  </table>
+  <p>Each entry in the full treatment is tagged to one or more of these, which is what makes the case consistent and impossible to dodge claim by claim.</p>
+</section>
+
+<section class="section pb">
+  <h2 class="sec">8 &middot; The Anatomy of a Real Change</h2>
+  <p>A real textual change has an anatomy. It has a date, a printer, a shelfmark, a place in a catalogue ;  and the church has always found it, named it, and kept it in the open.</p>
+  <table>
+    <caption>Documented English Bible variants ;  every one catalogued, none concealed</caption>
+    <thead><tr><th>Variant</th><th>Reading</th><th>Witness</th></tr></thead>
+    <tbody>
+      <tr><td class="k">1611 &ldquo;He/She&rdquo;</td><td>Ruth 3:15 ;  &ldquo;he went&rdquo; in the first printing, &ldquo;she went&rdquo; in the later</td><td>Robert Barker, London, 1611; Queens&rsquo; College Old Library, R.1.1</td></tr>
+      <tr><td class="k">1631 &ldquo;Wicked&rdquo;</td><td>Exodus 20:14 ;  the &ldquo;not&rdquo; omitted</td><td>Barker and the assigns of John Bill, 1631; STC 2296; British Library C.24.a.41</td></tr>
+      <tr><td class="k">1653 &ldquo;Unrighteous&rdquo;</td><td>1 Corinthians 6:9 ;  &ldquo;shall inherit&rdquo; for &ldquo;shall not inherit&rdquo;</td><td>John Field, London, 1653; ESTC R175288; Alexander Turnbull Library</td></tr>
+      <tr><td class="k">1717 &ldquo;Vinegar&rdquo;</td><td>Luke 20:9 heading ;  &ldquo;Vinegar&rdquo; for &ldquo;Vineyard&rdquo;</td><td>John Baskett, Oxford, 1717; Bridwell Library; Royal Collection Trust 1052106</td></tr>
+    </tbody>
+  </table>
+  <p>These are printing-house slips and edition states within a tradition ;  and the church caught every one, gave it a name, and preserved it. That is the anatomy of a real change. It leaves fingerprints.</p>
+
+  <h3>The claimed change has no anatomy</h3>
+  <p>The claim requires something else entirely: a meaning-changing alteration that appears at once across every tradition ;  the Greek witnesses, the scrolls, the Syriac, the Latin, the printed editions ;  and leaves behind no distribution and no copyist lineage. The remembered wording survives nowhere in the physical record, and nowhere but in memory.</p>
+  <p>That is the decisive test. A real variant has a distribution: some witnesses carry it and some do not, and the quotations pattern by era and by family. The claimed change has none. The absence of a trail is not evidence of a perfect crime; it is the signature of a memory rather than a manuscript.</p>
+
+  <h3>The flagship: Job 1:21</h3>
+  <p>Take the strongest single example. The remembered line is the present-tense couplet, &ldquo;the Lord giveth, and the Lord taketh away.&rdquo; It is not a vanished Bible. It is the English burial office, printed sixty-two years before the King James Bible was made.</p>
+  <table>
+    <caption>The same verse in two authorized English forms, side by side</caption>
+    <thead><tr><th>Witness</th><th>The clause</th><th>Form</th><th>Grade</th></tr></thead>
+    <tbody>
+      <tr><td class="k">1549 BCP, Burial Office</td><td>&ldquo;The Lord geueth, and the Lord taketh awaye&rdquo;</td><td>present</td><td><span class="tag iv">IV</span></td></tr>
+      <tr><td class="k">1604 BCP, Burial Office</td><td>&ldquo;The Lord giueth, and the Lorde taketh away&rdquo;</td><td>present</td><td><span class="tag t">T</span></td></tr>
+      <tr><td class="k">1611 KJV, Job 1:21</td><td>&ldquo;the LORD gave, and the LORD hath taken away&rdquo;</td><td>past / perfect</td><td><span class="tag iv">IV</span></td></tr>
+      <tr><td class="k">1662 BCP, Burial Office</td><td>&ldquo;The Lord gave, and the Lord hath taken away&rdquo;</td><td>past / perfect</td><td><span class="tag iv">IV</span></td></tr>
+    </tbody>
+  </table>
+  <p class="small">Grade IV: inspected on the dated leaf. Grade T: transcription-verified; a single 1604-family interior leaf cannot be distinguished from a 1552 or 1559 without a title page.</p>
+  <p>From 1611 to 1662, England buried its dead with the present-tense office while the lectern Bible read the perfect. Two authorized English forms of one verse, in simultaneous official use, for two generations. That is not a Bible that vanished and returned; it is a liturgy and a translation doing what each was made to do ;  and a memory doing its ordinary work when a pastor, asked for the verse, answers with the funeral.</p>
+
+  <figure class="plate">
+    <img src="images/exhibit-d-1611-kjv-job-1-21.jpg" alt="1611 King James Bible, Job 1:21, signature Z3">
+    <figcaption>Exhibit D. 1611 King James, Job 1:21, signature Z3. &ldquo;the LORD gaue, and the LORD hath taken away.&rdquo; The office said giveth; the page said gave.</figcaption>
+  </figure>
+  <figure class="plate">
+    <img src="images/exhibit-a-1549-bcp-burial.jpg" alt="1549 Book of Common Prayer, burial office, folio xxviii">
+    <figcaption>Exhibit A. 1549 Book of Common Prayer, burial office, folio xxviii. &ldquo;The LORD geueth, and the LORD taketh awaie,&rdquo; present tense, sixty-two years before the King James Bible.</figcaption>
+  </figure>
+</section>
+
+<section class="section pb">
+  <h2 class="sec">9 &middot; The Survey</h2>
+  <p>The empirical claim rests on a Google Forms quiz fielded 13 October&ndash;12 December 2025: 34 items, 12 yes/no and 22 three-option fill-ins; 31 form responses, 30 marked pastor, deacon, or minister. On Job 1:21 the keyed King James reading (&ldquo;gave / hath taken away&rdquo;) took 3.3 percent; the clustered wrong reading (&ldquo;giveth / taketh&rdquo;) took 96.7 percent; the third option (&ldquo;hath given / shall take away&rdquo;) took none. The result is real, and worth explaining. It is also the wrong instrument for the claim it is asked to carry.</p>
+  <div class="callout">
+    <span class="lbl">The one-line thesis</span>
+    <p>A memory survey can prove that memory differs. Only a text can prove that a text changed.</p>
+  </div>
+  <p>The questionnaire is a recognition instrument: it presents a verse frame and three options, and the respondent selects. It examines no physical copy. By its own construction, then, it cannot establish a textual change ;  it can only establish what a group of people recalled.</p>
+
+  <h4>The alternate explanation, and it is testable</h4>
+  <p>The convergence is exactly what shared exposure predicts. People formed in the same stream ;  the same translations, the same hymns, the same funeral liturgy, the same proverb books ;  repeat the same familiar forms. When the &ldquo;wrong&rdquo; answer matches a printed translation the respondent actually reads, the agreement is evidence of <em>real, living texts</em>, not of a vanished original. And the remembered readings are documented elsewhere: the burial office for Job; the parallel Gospels for &ldquo;the hem of his garment&rdquo; and &ldquo;take up thy bed&rdquo;; the modern versions for &ldquo;Messiah&rdquo; and &ldquo;grain&rdquo;; the hymn and the proverb for the rest.</p>
+
+  <h4>The probability claim</h4>
+  <p>The arithmetic is offered as proof: that agreement this tight cannot be chance. But the arithmetic is conditional on a model the instrument does not meet. The options were not equally attractive; the respondents were not guessing; the answers were not independent trials; and one questionnaire of thirty people is not a national sample. A very small probability under a false model does not make a supernatural model probable. It shows the model fits badly.</p>
+
+  <h4>The turn</h4>
+  <p>The claimant asks for a rational explanation of the misremembering. The explanation exists, and it is testable. In return, the claim owes what it has never produced: a before-and-after pair ;  one dated physical text, or one quotation, whose reading has since vanished from the whole tradition without distribution or lineage. Until that exhibit appears, the survey stands as a study of memory, not a study of the text.</p>
+</section>
+
+<section class="section pb">
+  <h2 class="sec">10 &middot; The Test the Document Cannot Pass</h2>
+  <p>There is a test every method must pass, and it is this: it must survive the judgments it makes. The document judges the world by a rule; that rule is applied here to the document.</p>
+  <p>Its detector of change is memory together with community consensus ;  what the many remember, against what the page now says. But the document&rsquo;s own warning-text describes a coming delusion sent upon those who &ldquo;received not the love of the truth&rdquo; (2 Thessalonians 2:10&ndash;11). The faculty it trusts as its instrument is the faculty its own verse names as the one deceived. And when it lists where the word may be preserved ;  settled in heaven in one place, hidden in the heart in another ;  the two locations contradict each other.</p>
+  <p>The counsel of the prophet already knew the hazard: &ldquo;The heart is deceitful above all things&rdquo; (Jeremiah 17:9). That verse appears nowhere in forty-nine pages. A method that rules the heart reliable without ever hearing that warning has not yet been tested in kind.</p>
+</section>
+
+<section class="section pb">
+  <h2 class="sec">11 &middot; The Positive Case</h2>
+  <p>The refutation does not end in negation. Five affirmations stand, and none of them depends on the concessions above.</p>
+
+  <h4>The method of Christ and the apostles</h4>
+  <p>Christ refused the sword at His arrest because the Scriptures must be fulfilled (Matthew 26:54). He diagnosed error about Scripture as ignorance of it, not alteration of it: &ldquo;Do ye not therefore err, because ye know not the scriptures, neither the power of God?&rdquo; (Mark 12:24). He expounded, from Moses and all the prophets, the things concerning Himself (Luke 24:27), and He said that the Scripture cannot be broken (John 10:35). The apostles then argued from the text&rsquo;s exact wording ;  from a single tense, from the number of a noun ;  with &ldquo;it is written&rdquo; as their final appeal. A method built on wording presupposes a wording that holds.</p>
+
+  <h4>The oath-class promise</h4>
+  <p>The promises that do not fail are the sworn ones: God is not a man, that He should lie (Numbers 23:19); the Strength of Israel will not repent of His oath (1 Samuel 15:29), even as the same chapter records His relenting over an administrative appointment (15:11); His covenant He will not break, nor alter the thing that is gone out of His lips (Psalm 89:34); He cannot lie (Titus 1:2; Hebrews 6:17&ndash;18). The class distinction is the document&rsquo;s own undoing: what God rescinds are conditionals, and what He keeps are oaths.</p>
+
+  <h4>The saying without a terminus</h4>
+  <p>&ldquo;Heaven and earth shall pass away, but my words shall not pass away&rdquo; (Matthew 24:35). Not a footnote to a translation ;  a saying set against the passing of the world itself.</p>
+
+  <h4>The transmission record</h4>
+  <p>The great Isaiah scroll and the medieval Hebrew text stand substantially together across eleven centuries, with their variants catalogued, not concealed. The very fact that textual criticism can map variation is why it would have caught a change that erased its own trail. The record shows ordinary copying, and nothing else.</p>
+
+  <h4>The memory of the church</h4>
+  <p>The oldest memory in this discussion is not individual recollection but the public reading of Scripture ;  the lectionary, the liturgy, the cycle of the church year, running unbroken for two millennia. It is a communal memory, older and steadier than any private one, and it has carried the text forward to us.</p>
+</section>
+
+<section class="section pb">
+  <h2 class="sec">12 &middot; The Verdict</h2>
+  <p>As a critique, the document is often right. It is right about Psalm 12, about Psalm 119, about the difference between the word and the book, about the pretensions of theological necessity, and about a doctrine of preservation that was inferred rather than read. On these points it should be credited, and this response credits it first.</p>
+  <p>As a case, it does not stand. Its premise is a possibility, its engine is a single collapse from <em>can</em> to <em>is</em>, its mechanism is a pairing no text authorizes, its clock is set to &ldquo;probably right now,&rdquo; and its instrument is the one its own judgment-text names as deceived. It wins where it is strong, and it goes to the wall everywhere else.</p>
+  <p>The book that records its own revisions, survives its own judgments, and carries its critics&rsquo; verses intact across twenty centuries is not being edited. It is standing.</p>
+  <div class="scripture">
+    <p>&ldquo;The grass withereth, the flower fadeth: but the word of our God shall stand for ever.&rdquo;</p>
+    <cite>Isaiah 40:8 ;  and this is the word which by the gospel is preached unto you (1 Peter 1:25)</cite>
+  </div>
+  <div class="verdict"><b>THE PHENOMENON IS REAL.</b> &nbsp; The paradigm is contested. &nbsp; The text says what it says. &nbsp; Start there.</div>
+</section>
+
+</div>
+</body>
+</html>

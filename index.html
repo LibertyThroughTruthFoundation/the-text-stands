@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Text Stands — Version 2.02</title>
+<style>
+:root{
+  --ink:#1a1a1a; --muted:#585450; --rule:#c8c1b6; --accent:#7a1f1f;
+  --wash:#f6f2ec; --paper:#fffdf9;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#e8e4dd;color:var(--ink);font-family:var(--serif);font-size:11.4pt;line-height:1.56}
+.wrap{max-width:47rem;margin:0 auto;background:var(--paper);padding:3.2rem 2.6rem 5rem}
+
+.cover{text-align:center;padding:5rem 0 4rem;border-bottom:1px solid var(--rule);margin-bottom:2.5rem}
+.cover .rule{width:64px;height:3px;background:var(--accent);margin:0 auto 2rem}
+.cover h1{font-family:var(--sans);font-weight:700;letter-spacing:.12em;font-size:2.05rem;margin:0 0 1rem;color:var(--ink)}
+.cover .subtitle{font-size:1.02rem;color:var(--muted);font-style:italic;max-width:34rem;margin:0 auto 2rem}
+.cover .meta{font-family:var(--sans);font-size:.82rem;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin:.35rem 0}
+.cover .org{font-family:var(--sans);font-size:.78rem;letter-spacing:.06em;color:var(--muted);margin-top:2rem}
+
+.contents h2{font-family:var(--sans);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--rule);padding-bottom:.5rem;margin:0 0 1.2rem}
+.contents ol{list-style:none;margin:0;padding:0;counter-reset:c}
+.contents li{counter-increment:c;padding:.34rem 0;border-bottom:1px dotted #d8d2c8;font-size:.98rem}
+.contents li::before{content:counter(c,decimal-leading-zero);font-family:var(--sans);font-size:.74rem;color:var(--accent);margin-right:1rem;letter-spacing:.05em}
+.contents li.sub{padding-left:1.6rem;font-size:.9rem;color:var(--muted)}
+
+.section{margin-top:2.6rem}
+.section.pb{page-break-before:always}
+h2.sec{font-family:var(--sans);font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--rule);padding-bottom:.5rem;margin:0 0 1.1rem}
+h3{font-family:var(--sans);font-weight:700;font-size:1.02rem;margin:1.9rem 0 .5rem}
+h4{font-family:var(--sans);font-weight:600;font-size:.9rem;margin:1.4rem 0 .35rem;color:#33302c}
+p{margin:0 0 .85rem}
+.lead{font-size:1.06rem}
+strong{font-weight:700}
+em{font-style:italic}
+.small{font-size:.86rem;color:var(--muted)}
+
+.scripture{margin:1.6rem 0;padding:.9rem 0 .9rem 1.2rem;border-left:3px solid var(--accent);background:linear-gradient(90deg,var(--wash),transparent)}
+.scripture p{font-style:italic;margin:0 0 .3rem}
+.scripture cite{font-family:var(--sans);font-style:normal;font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)}
+
+.callout{border:1px solid var(--rule);border-left:4px solid var(--accent);background:var(--wash);padding:1.1rem 1.3rem;margin:1.6rem 0}
+.callout .lbl{font-family:var(--sans);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:.45rem}
+.callout p:last-child{margin-bottom:0}
+
+table{width:100%;border-collapse:collapse;margin:1.4rem 0;font-size:.9rem}
+caption{caption-side:top;text-align:left;font-family:var(--sans);font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-bottom:.5rem}
+th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+thead th{font-family:var(--sans);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:#2c2a27;background:var(--wash);border-bottom:2px solid var(--accent)}
+tbody tr:nth-child(even){background:#fbf8f4}
+td.k{font-family:var(--sans);font-size:.78rem;color:var(--accent);white-space:nowrap}
+
+.tag{font-family:var(--sans);font-size:.68rem;letter-spacing:.06em;padding:.08rem .4rem;border-radius:2px;border:1px solid var(--rule);white-space:nowrap}
+.tag.iv{background:#f0f7f0;border-color:#9db89d;color:#2f542f}
+.tag.t{background:#faf6ec;border-color:#cbb98a;color:#6a5420}
+.tag.u{background:#f4f0f8;border-color:#b6a7c8;color:#4d3a63}
+
+.plate{margin:1.6rem 0;border:1px solid var(--rule);background:var(--paper)}
+.plate img{display:block;width:100%;height:auto;max-height:8.8in;object-fit:contain;background:#eeeae2}
+@media print{
+  .plate img{max-height:8.2in}
+  .plate{break-inside:avoid;page-break-inside:avoid}
+}
+.plate .box{background:#eeeae2;height:8.5rem;display:flex;align-items:center;justify-content:center;color:#9a9388;font-family:var(--sans);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:1rem}
+.plate figcaption{font-size:.82rem;color:var(--muted);padding:.7rem .8rem;border-top:1px solid var(--rule)}
+
+.claim{border:1px solid var(--rule);border-top:3px solid var(--accent);padding:1.2rem 1.4rem;margin:1.6rem 0;background:#fdfbf7}
+.claim h3{margin-top:0}
+.claim .row{margin:.5rem 0}
+.claim .lbl{font-family:var(--sans);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+
+.verdict{font-family:var(--sans);font-size:.86rem;border-top:2px solid var(--accent);padding-top:.6rem;margin-top:1.4rem}
+.verdict b{color:var(--accent);letter-spacing:.04em}
+
+@media print{
+  body{background:#fff;font-size:10.6pt}
+  .wrap{max-width:none;background:#fff;padding:0;margin:0}
+  .no-print{display:none!important}
+  .pb{page-break-before:always}
+  h2.sec,h3{break-after:avoid}
+  table,figure,.callout,.scripture,.claim{break-inside:avoid}
+  a{color:inherit;text-decoration:none}
+  tbody tr:nth-child(even){background:#fff}
+}
+@page{size:letter;margin:19mm 17mm}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="cover">
+  <div class="rule"></div>
+  <h1>THE TEXT STANDS</h1>
+  <p class="subtitle">A Claim-by-Claim Response to &ldquo;25&nbsp;Theological Reasons To Consider Supernatural Bible Changes&rdquo;</p>
+  <div class="rule" style="width:40px;margin-top:1.6rem"></div>
+  <p class="meta">Version 2.02</p>
+  <p class="meta">September 2026</p>
+  <p class="org">Liberty Through Truth Foundation</p>
+</header>
+
+<nav class="contents">
+  <h2>Contents</h2>
+  <ol>
+    <li>The Case Before the Court
+      <ol class="sub">
+        <li class="sub">The Two Questions</li>
+        <li class="sub">Who Is Speaking</li>
+        <li class="sub">What This Is Not</li>
+        <li class="sub">The Reader&rsquo;s Contract</li>
+        <li class="sub">The Counter-Declaration</li>
+        <li class="sub">On the Ninety-Five Theses</li>
+      </ol>
+    </li>
+    <li>How We Know and How We Read
+      <ol class="sub">
+        <li class="sub">The Tier System and the Modal Ladder</li>
+        <li class="sub">The Original-Audience Rule</li>
+        <li class="sub">The Dominical and Apostolic Method</li>
+        <li class="sub">Semantic Integrity: Word, Scripture, Bible</li>
+        <li class="sub">The Textual Base and the Distribution Test</li>
+        <li class="sub">The Two Comings</li>
+        <li class="sub">The Seven Tests</li>
+      </ol>
+    </li>
+    <li>The Nine Failure Modes</li>
+    <li>Where the Document Is Right: The Concession Ledger</li>
+    <li>The Twenty-Five Claims</li>
+    <li>The Incoherence Ledger</li>
+    <li>The Consequences Ledger</li>
+    <li>The Empirical Challenge: The Survey</li>
+    <li>The Deciders</li>
+    <li>The Verdict and the Positive Case</li>
+    <li>Appendices</li>
+  </ol>
+</nav>
+
+<!-- ============================ PART 1 ============================ -->
+<section class="section pb">
+  <h2 class="sec">1 &middot; The Case Before the Court</h2>
+
+  <h3>The Two Questions</h3>
+  <p class="lead">Two questions are in play, and they are not the same question.</p>
+  <p>The first is <strong>theological</strong>: does Scripture teach, or permit the inference, that God is now supernaturally altering Bibles? This is a question about what the written word of God says about itself, and it is answered by reading the text in its context and asking what it claims.</p>
+  <p>The second is <strong>empirical</strong>: are Bibles demonstrably, physically, being altered? This is a question about the world, and it is answered by producing a thing (a manuscript, a printed page, a quotation, a photograph) and comparing it to another thing. It is answered with artifacts, or it is not answered at all.</p>
+  <p>The published document rests its theological case on the second question and never establishes it. The public argument now asserts it outright, claiming that a survey of pastors proves the Bible is changing. This response answers both, each in its own currency, and it refuses to let one stand in for the other. A theological answer does not settle an empirical claim, and a headcount does not settle a theological one.</p>
+
+  <div class="callout">
+    <span class="lbl">Source under review</span>
+    <p><em>25 Theological Reasons To Consider Supernatural Bible Changes</em> (the 49-page theological brief circulating with that title). Hosted among the Educational Docs at <a href="https://alteredbible.com/educational-docs/">alteredbible.com/educational-docs</a>. The empirical claim now attached to that brief is the National Pastor Bible Quiz at <a href="https://alteredbible.com/survey/">alteredbible.com/survey</a>, fielded 13 October&ndash;12 December 2025, with the presenter&rsquo;s public assertion that the quiz proves the Bible is changing. This response answers the brief and the quiz. It does not answer the man.</p>
+  </div>
+  <div class="scripture">
+    <p>&ldquo;Prove all things; hold fast that which is good.&rdquo;</p>
+    <cite>1 Thessalonians 5:21, the standard applied here, and the claimant&rsquo;s own</cite>
+  </div>
+
+  <h3>Who Is Speaking</h3>
+  <p>I once held the position under review. For a season I was not a skeptic of the supernatural-changes thesis but an advocate of it. I shared its content, recommended its teachers, and believed, genuinely and not as a debating posture, that a real thing had been uncovered about the times we are living in. I did not hold it lightly, and I did not hold it alone. The movement is not a fringe of three people in a basement. It has surveys, statements of faith, a podcast circuit, and an audience of sincere Christians who feel they have finally seen what the institutions are too compromised to say.</p>
+  <p>So this is not the work of someone who never felt the pull. It is the work of someone who felt it, followed it, and then had to walk it back.</p>
+  <p>What I walked back, precisely, is the claim that Scripture is being supernaturally altered. I withdrew it. What I did not walk back is the reading of the little season that had traveled alongside it. I revised that reading and still hold a disciplined form of it. Concretely: I set aside an evidentiary layer that had leaned on timeline-revision and hidden history, on the idea that the millennial evidence lay in artifacts rather than in the text&rsquo;s own stated terms, and I corrected a scope error. The deception of the little season, as Revelation describes it, is aimed at the allegiance of the nations (Revelation 20:3, 7&ndash;9). The nations are deceived into a war against the camp of the saints. It was never a charter for the corruption of the church&rsquo;s Scriptures, and treating it as one was my error, not the text&rsquo;s.</p>
+  <p>Two readers are looking over my shoulder at all times. One is the person still inside the framework, who has every reason to suspect that any critique is written by someone who never understood, or who caved, or who is protecting an institution. To that reader: I understand the framework because I lived in it, and I am not writing from a place of safety at people who are lost. The other reader is the skeptic of the movement, who may be tempted to use this document as a cudgel and to enjoy the disproof a little too much. To that reader: the people inside the claim are not stupid and are not dishonest. They have learned, through hard experience, that the official story is not automatically the true story, and that instinct is not a spiritual defect. In many arenas it has been vindicated. The problem is not that they trusted too little. It is that a muscle trained against one kind of claim has been applied, without recalibration, to a different kind altogether.</p>
+
+  <h3>What This Is Not</h3>
+  <p>It is not a defense of King James onlyism.</p>
+  <p>It is not a defense of a doctrine of verbal, plenary preservation.</p>
+  <p>It is not a defense of &ldquo;theological necessity,&rdquo; the argument that God would obviously not allow such a thing and therefore has not. The document is right to reject that argument, and this response rejects it too.</p>
+  <p>It is not a claim that the church&rsquo;s traditions are innocent of proof-text abuse. On the contrary, one of the concessions below lands against a tradition this response otherwise shares.</p>
+  <p>It is not neutral. Its premises are stated early, so that the reader can audit the auditor. Fairness here means disclosed premises, not neutrality.</p>
+
+  <h3>The Reader&rsquo;s Contract</h3>
+  <p>Three promises, made before the first claim is touched.</p>
+  <h4>Steelman</h4>
+  <p>Every claim is stated in its strongest form before it is answered, in the document&rsquo;s own words and with its own page numbers. Not the version that is easiest to knock down, but the version its author would recognize as his own. If the strongest form of a claim is not engaged, the refutation that follows is worthless.</p>
+  <h4>Concede</h4>
+  <p>Every place the document is right is granted first, plainly, on the record. This is not a courtesy. It is the only way a refutation has any force at all. A case that cannot concede is not a case; it is a temper.</p>
+  <h4>Criteria</h4>
+  <p>The tests by which this response could itself be shown wrong are set out in advance, including what would change my mind. This is the promise the document does not make and cannot make. The document&rsquo;s interpretive framework is built so that no evidence can count against it: if the text has changed, that confirms the thesis, and if the text has not, that only shows the change was subtle, or was providentially hidden, or was rewritten along with everything else. A position that explains in advance why every possible observation is consistent with it has stopped being a claim about the world. This response does the opposite. It names the one exhibit that would overturn it, and it says plainly that it would want to know.</p>
+  <p>There is one more rule, and it is about tone. The document, at its pressure points, raises its voice. It calls the opposing position laughable, it mocks the sentimental objection, it tells its critics to sit down and be quiet. That volume is noted here as a fact about the document, and it is not answered in kind. The strongest argument in this document is a dated leaf and a shelfmark. A sneer cannot compete with a page image, and it should not try. Let the record do the shouting.</p>
+
+  <h3>The Counter-Declaration</h3>
+  <div class="callout">
+    <p>He has nailed his theses to the door. Fair enough. Here is ours. We affirm that God preserves His word; that the apostles argued from its exact wording; that the covenant archive reports its own amendments in writing and preserves what it supersedes; and that no text in the canon predicts the silent alteration of Scripture. We affirm that the church is reformed by the recoverable text, and that this is what a reformation is. We will answer his survey, his proof-texts, and his eschatology, one claim at a time, on the record.</p>
+  </div>
+
+  <h3>On the Ninety-Five Theses</h3>
+  <p>The felt analogy deserves a fair hearing, not a rebuke. From the claimant&rsquo;s perspective this is a church-reforming act of reformation magnitude, and sincerity on that point is granted. But the analogy inverts its own precondition, and that is worth stating precisely.</p>
+  <p>Luther&rsquo;s Ninety-Five Theses presuppose a stable, quotable text. They were argued from Scripture&rsquo;s wording, and the Reformation&rsquo;s slogan was <em>ad fontes</em>, back to the sources, because the sources are both authoritative and recoverable. Erasmus&rsquo;s Greek New Testament and grammatical exegesis are the fuel of the Reformation. A reformation built on the claim that the text may have been silently edited, and that only memory can detect it, cannot quote the text to prove it. It denies the recoverability that made the Reformation possible. Luther&rsquo;s movement produced a translation-and-scholarship enterprise, textual criticism in service of the church. This thesis renders that enterprise incoherent.</p>
+  <p>So the analogy is not arrogant. It is revealing. And the answer to it is not &ldquo;here are my theses,&rdquo; but &ldquo;here is the text, and here is why it stands.&rdquo;</p>
+</section>
+
+<!-- ============================ PART 2 ============================ -->
+<section class="section pb">
+  <h2 class="sec">2 &middot; How We Know and How We Read</h2>
+
+  <h3>The Tier System and the Modal Ladder</h3>
+  <p>Every claim in this dispute can be graded by how much the text actually supports it.</p>
+  <table>
+    <caption>The epistemic grades used throughout this response</caption>
+    <thead><tr><th style="width:16%">Tier</th><th>What it means</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Tier 1</td><td>Explicit textual data: direct statements of the text.</td></tr>
+      <tr><td class="k">Tier 2</td><td>What two or more lines of text together require.</td></tr>
+      <tr><td class="k">Tier 3</td><td>Hypothesis: coherent, text-compatible, unproven.</td></tr>
+      <tr><td class="k">Tier 4</td><td>Speculation: unanchored; discard.</td></tr>
+    </tbody>
+  </table>
+  <p>The preaching rule follows: doctrine may be preached at Tier 1 and Tier 2 only. Tier 3 may be held as hypothesis, labeled as such, and never taught as settled. Tier 4 is never taught. The document&rsquo;s core conclusion, that all Bibles are supernaturally changing, never rises above Tier 3 anywhere in forty-nine pages, and it is preached as established. That gap between tier and tone is the first finding of this audit.</p>
+  <p>There is also a modal ladder: <em>can</em>, <em>could</em>, <em>may</em>, <em>is</em>, <em>did</em>. The recurring form of nearly all twenty-five claims is this: God is sovereign and has done analogous things (Tier 1, true), therefore God <em>could</em> permit text alteration (Tier 3, valid as possibility), therefore He <em>is</em> doing it, and refusal to affirm it is presumption. That last step does not follow. Possibility is not reportage. Permission requires a granted authority, a text, and none is produced.</p>
+  <div class="callout">
+    <span class="lbl">Negative finding, stated per protocol</span>
+    <p>No text in the canon asserts, predicts, or narrates the supernatural alteration of Scripture manuscripts. Searched across the Masoretic Text, the Septuagint, the Dead Sea Scrolls, and the breadth of the Ethiopian canon. We say &ldquo;not located,&rdquo; never &ldquo;does not exist.&rdquo;</p>
+  </div>
+
+  <h3>The Original-Audience Rule</h3>
+  <p>Every text is first located by what it meant to its first audience, before any later system is allowed to speak. The document demands this rule of others, charging its opponents with reckless disregard for context, and then exempts itself. Its own treatment of &ldquo;the time of the end&rdquo; as probably right now performs zero audience-relevance work. That exemption sits at the engine of the case.</p>
+  <p>Two worked examples, tagged as framework readings and not as Tier 1 findings: &ldquo;the end of the age&rdquo; (<em>sunteleia tou aionos</em>) in Matthew 24:3 refers to the end of the Temple-covenant age, the AD 70 horizon, not world termination; and Daniel 12:7 defines &ldquo;the time of the end&rdquo; by its own words, &ldquo;when he shall have accomplished to scatter the power of the holy people.&rdquo; These are commitments, stated as such.</p>
+
+  <h3>The Dominical and Apostolic Method</h3>
+  <p>This is a finding, not a framework commitment, and it is the first load-bearing leg of the positive case. Christ&rsquo;s own handling of the written Scriptures is the model the whole dispute turns on.</p>
+  <ul>
+    <li><strong>Matthew 26:54</strong>: &ldquo;But how then shall the scriptures be fulfilled, that thus it must be?&rdquo; At His arrest, Christ refuses the sword <em>because the Scriptures must be fulfilled</em>. The Passion&rsquo;s own grammar is &ldquo;Scripture says X, therefore X happens.&rdquo; A text whose content events can fulfill is a text with determinate, checkable content.</li>
+    <li><strong>Mark 12:24</strong>: &ldquo;Do ye not therefore err, because ye know not the scriptures, neither the power of God?&rdquo; Christ&rsquo;s own diagnosis of error about Scripture is <em>ignorance of it</em>, never alteration of it. The dominical taxonomy of error has two entries: ignorance of the text, and ignorance of God&rsquo;s power. &ldquo;The text mutated&rdquo; is not among them.</li>
+    <li><strong>Luke 24:27</strong>: &ldquo;And beginning at Moses and all the prophets, he expounded unto them in all the scriptures the things concerning himself.&rdquo; The fulfillment hermeneutic in its dominical form. Christ expounds the written Old Testament rather than doubting it. The Emmaus response to doubt is exegesis, not retreat.</li>
+    <li><strong>John 10:35</strong>: &ldquo;the scripture cannot be broken.&rdquo;</li>
+  </ul>
+  <p>The New Testament then argues from Scripture&rsquo;s exact wording. One jot or one tittle (Matthew 5:18). The tense of a verb decides an argument: &ldquo;I AM the God of Abraham&rdquo; (Matthew 22:31&ndash;32). The number of a noun: &ldquo;seed,&rdquo; not &ldquo;seeds&rdquo; (Galatians 3:16). &ldquo;It is written&rdquo; appears on the order of ninety times across the New Testament, by common count, as the final and unquestioned appeal.</p>
+  <p>The implication is the whole of it: apostolic argument presupposes a stable citation-text. If the text retroactively mutates, apostolic argumentation is unreconstructable, and the apostles&rsquo; own method dissolves. This is a finding, and the document never touches it.</p>
+  <p>One dominical saying carries no terminus and is used as such: <strong>Matthew 24:35</strong>, &ldquo;Heaven and earth shall pass away, but my words shall not pass away.&rdquo; We do not load Matthew 5:17&ndash;18 as a perpetual-preservation proof, because its own stated terminus (&ldquo;till all be fulfilled&rdquo;) is exactly the opening the document&rsquo;s twenty-fifth reason needs. Matthew 5:18 remains a witness to verbal exactness in argument, not the document&rsquo;s preservation clause.</p>
+
+  <h3>Semantic Integrity: Word, Scripture, Bible</h3>
+  <p>The full range of &ldquo;word&rdquo; is granted. <em>Davar</em> as speech-event (Genesis 15:1). <em>Logos</em> as Person (John 1:1; Revelation 19:13). The active word (Hebrews 4:12). The word as multiplying influence (Acts 19:20). The document is right that careless conflation of &ldquo;word&rdquo; with &ldquo;Bible&rdquo; is rampant and has done real damage.</p>
+  <p>But the range also includes inscribed text. &ldquo;Moses wrote all the words of the LORD&rdquo; (Exodus 24:4). &ldquo;Write this for a memorial in a book&rdquo; (Exodus 17:14). &ldquo;Note it in a book&rdquo; (Isaiah 30:8). &ldquo;the place where it was written&rdquo; (Luke 4:17). &ldquo;For the scripture saith unto Pharaoh&rdquo; (Romans 9:17), God&rsquo;s word to Pharaoh, recorded in Exodus, cited as &ldquo;the scripture saith.&rdquo; &ldquo;How readest thou?&rdquo; (Luke 10:26).</p>
+  <div class="callout">
+    <span class="lbl">The rule</span>
+    <p>Range is not exclusion. The document proves, correctly, that &ldquo;word&rdquo; is not always &ldquo;Bible,&rdquo; then concludes it is never the preserved text, an exclusion the texts above forbid. The substitution test cuts both ways: you may not substitute &ldquo;Bible&rdquo; into John 1:1, and you may not substitute &ldquo;vision&rdquo; into Exodus 24:4. Symmetry is honesty. The document runs the test in one direction only.</p>
+  </div>
+
+  <h3>The Textual Base and the Distribution Test</h3>
+  <p>This framework uses a multi-witness method with no default winner and no priority tier. Traditions are weighed per passage by evidence. The Masoretic Text is valued; the Septuagint is weighted where it preserves older readings; the Dead Sea Scrolls are decisive per case, not broadly; the Ethiopian canon is the breadth default only and is never a reading trump; the Peshitta is consulted for reading history. The supernatural-changes claim must survive all witnesses simultaneously, and no produced witness has ever touched even one.</p>
+  <p>The signature case is Deuteronomy 32:8. The Septuagint and the Qumran fragment 4QDeut-j read &ldquo;sons of God&rdquo; against the Masoretic &ldquo;sons of Israel.&rdquo; Note what this proves: real variants are documented, traceable, and distributed across text families and eras. Textual criticism is precisely the discipline that catches variation, which is exactly why it would catch retroactive cosmic editing.</p>
+  <div class="callout">
+    <span class="lbl">The distribution test, the decisive epistemic tool</span>
+    <p>A real variant has a distribution: some witnesses carry it and some do not, and quotations pattern by era and by family. A retroactive cosmic edit would have no distribution at all: it would appear nowhere in the physical record while the claimant&rsquo;s memory insists it was there. Twenty-five centuries of manuscript evidence show ordinary copyist variation and nothing else. Memory-only discrepancies, with no physical witness and no lineage, are the signature of misremembering, not of alteration.</p>
+  </div>
+  <p>Proving the point from the other direction is the documented-variant catalogue in the appendices: real, famous, edition-level variants such as the 1611 &ldquo;He/She&rdquo; Bible (Ruth 3:15), the 1631 &ldquo;Wicked Bible&rdquo; (Exodus 20:14), the 1653 &ldquo;Unrighteous Bible&rdquo; (1 Corinthians 6:9), and the 1717 &ldquo;Vinegar Bible&rdquo; (Luke 20:9 heading). Every one has a date, a printer, a shelfmark, and a page image. That is what a documented textual change looks like. None of the twelve claimed changes has any of it.</p>
+  <p>One clarification the document blurs, and we do not: real textual variation, canonical extent, and alleged wording-edits are three different categories. Word-level variation is documentable and distributed (Deuteronomy 32:8). Canonical extent is a church-historical question about which books were received, not a change in the wording of any book. Alleged wording-edits are undocumentable, with no lineage and no distribution. Documented, distributed, traceable change with a written record is the opposite of retroactive silent editing. State this in Part 1 and again whenever a broader canon is introduced.</p>
+
+  <h3>The Two Comings</h3>
+  <p>End-times language is sorted by its own content. Coming One is judicial and past, AD 70: &ldquo;coming on the clouds&rdquo; is the judgment idiom (Daniel 7:13; Isaiah 19:1), and &ldquo;this generation&rdquo; (Matthew 24:34) fixes the horizon. Coming Two is bodily and future: visible descent (Acts 1:11), the resurrection of all (1 Thessalonians 4:16&ndash;17; 1 Corinthians 15), final judgment, and the descent of the New Jerusalem (Revelation 21:2&ndash;3). The sorting rule: imminent language to Coming One, resurrection and new-creation language to Coming Two, ambiguous language flagged both ways honestly. We never drift to full preterism. The resurrection, the judgment, and the new heavens and earth stand.</p>
+
+  <h3>The Seven Tests</h3>
+  <p>Every claim in Part 5 is measured against these.</p>
+  <table>
+    <caption>The criteria of refutation</caption>
+    <thead><tr><th style="width:12%">Code</th><th style="width:30%">Test</th><th>The question it asks</th></tr></thead>
+    <tbody>
+      <tr><td class="k">T1</td><td>Textual Test</td><td>Does an inspired text say what the claim needs said, with the object actually identified?</td></tr>
+      <tr><td class="k">T2</td><td>Audience Test</td><td>What would the first hearers have understood this to mean?</td></tr>
+      <tr><td class="k">T3</td><td>Modal Test</td><td>Does the conclusion&rsquo;s modality match the premise&rsquo;s? Can a &ldquo;can&rdquo; premise produce an &ldquo;is&rdquo; conclusion without a &ldquo;does&rdquo; text?</td></tr>
+      <tr><td class="k">T4</td><td>Self-Application Test</td><td>Does the proposed epistemology survive the judgment-texts the proposal itself cites?</td></tr>
+      <tr><td class="k">T5</td><td>Dominical &amp; Apostolic-Use Test</td><td>Does the claim cohere with how Christ and the apostles actually argued from Scripture?</td></tr>
+      <tr><td class="k">T6</td><td>Tradition Test</td><td>Does the claim account for the whole physical tradition, or only for the reader&rsquo;s memory?</td></tr>
+      <tr><td class="k">T7</td><td>Gospel-Ground Test</td><td>Does the mechanism stop before it voids the promises the gospel still needs?</td></tr>
+    </tbody>
+  </table>
+  <p>The negative burden, stated plainly: we do not have to prove that God could never do this. We have to show three things. First, no text asserts it. Second, the document&rsquo;s permission structure never reaches it. Third, the positive case stands, on the dominical and apostolic method and the transmission record. That is a complete refutation of a theological case. Nothing more is owed.</p>
+  <p>Throughout, findings and commitments are kept in separate registers. Findings, safe to argue as conclusions: the distribution test; the dominical and apostolic method; the nine failure modes; the internal incoherences; and the self-application collapse, which needs none of our canon, eschatology, or text-tradition premises. Commitments, stated as framework and never as Tier 1 findings: the multi-witness weighting; the partial-preterist reading of Daniel 12; the Ethiopian breadth default; the revised little-season reading; and Enoch and Jubilees as authority. Transmission exhibits are illustration, not evidence.</p>
+</section>
+
+<!-- ============================ PART 3 ============================ -->
+<section class="section pb">
+  <h2 class="sec">3 &middot; The Nine Failure Modes</h2>
+  <p>The twenty-five claims do not need twenty-five separate refutations. They recycle nine structural failures. Naming them once lets the reader recognize the shape wherever it recurs, and it is what makes the case consistent and impossible to dodge claim by claim.</p>
+  <table>
+    <caption>The shared failure modes, with the code used throughout Part 5</caption>
+    <thead><tr><th style="width:12%">Code</th><th style="width:28%">Name</th><th>In one sentence</th></tr></thead>
+    <tbody>
+      <tr><td class="k">F1</td><td>Modal Collapse</td><td>&ldquo;God can&rdquo; becomes &ldquo;God is,&rdquo; without a text that says &ldquo;God does.&rdquo;</td></tr>
+      <tr><td class="k">F2</td><td>Jurisdiction Gap</td><td>Silence about where a promise lands is read as a promise that it lands nowhere.</td></tr>
+      <tr><td class="k">F3</td><td>Category Inversion</td><td>Having forbidden the conflation of &ldquo;word&rdquo; with &ldquo;Bible,&rdquo; the document conflates its own categories: silence with corruption, administration with document, access with alteration.</td></tr>
+      <tr><td class="k">F4</td><td>The Unstated Modifier</td><td>Later texts are played as trump cards that never name the object they are said to override.</td></tr>
+      <tr><td class="k">F5</td><td>Precedent Stretching</td><td>Real judgments, of silence, of affliction, of confusion, are reassigned to a category no text attests: the editing of covenant documents.</td></tr>
+      <tr><td class="k">F6</td><td>Audience Evacuation</td><td>Time-markers are stripped of their first-century referents and relocated to &ldquo;probably right now.&rdquo;</td></tr>
+      <tr><td class="k">F7</td><td>Self-Referential Collapse</td><td>The method trusts the very faculty the document&rsquo;s own judgment-text calls deluded.</td></tr>
+      <tr><td class="k">F8</td><td>Burden Inversion</td><td>Absence of prohibition is treated as presence of promise, and the opponent is asked to prove a universal negative.</td></tr>
+      <tr><td class="k">F9</td><td>Sanction Inversion</td><td>A warning against tampering is read as a permission for it.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>F7, Stated in Full</h3>
+  <p>F7 deserves its own treatment, because it is the one blow that requires none of our canon, our eschatology, or our text traditions. It needs only that the reader notice the document&rsquo;s own inconsistency.</p>
+  <p>The document proposes memory plus community consensus as the detector of changes. Its own opening claim is that &ldquo;we have hidden the unchanged word in our hearts prior to the changes.&rdquo; Yet the document also cites 2 Thessalonians 2:9&ndash;11, in which God sends a strong delusion upon those who &ldquo;received not the love of the truth,&rdquo; as its permission-text for the deception era. The faculty the document trusts as its instrument is the exact faculty its own judgment-text names as deluded.</p>
+  <p>And the counsel of the prophet already knew the hazard: &ldquo;The heart is deceitful above all things&rdquo; (Jeremiah 17:9). That verse appears nowhere in forty-nine pages. A method that rules the heart reliable without ever hearing that warning has not yet been tested in kind.</p>
+  <p>There is a second self-collapse in the same vein. The document lists two locations for the preserved word: settled in heaven (Psalm 119:89) and hidden in the heart. If the only preserved location is heaven, then the heart-copy is either delivered from heaven by some verifiable means, or it is taken from the now-corrupted book, in which case it is corrupted too. The epistemology borrows what the theology denies.</p>
+  <p>Lead with F7 wherever the audience has not accepted our framework. It stands alone.</p>
+</section>
+
+<!-- ============================ PART 4 ============================ -->
+<section class="section pb">
+  <h2 class="sec">4 &middot; Where the Document Is Right: The Concession Ledger</h2>
+  <p>A refutation that cannot concede is a rant. This one leads with its concessions, and they are true, and several of them land against a tradition this response otherwise shares. A reader who sees the audit concede where it is weakest will trust it where it is strongest.</p>
+
+  <h3>C1 &middot; &ldquo;Word&rdquo; and &ldquo;Bible&rdquo; Are Not Synonyms</h3>
+  <p>Granted in full. The semantic ranges are real: John 1:1, Revelation 19:13, Hebrews 4:12. The document is right that careless conflation is rampant and damaging. This is its strongest semantic point.</p>
+
+  <h3>C2 &middot; Psalm 119:89 Locates the Word in Heaven</h3>
+  <p>Granted. <em>Natsab</em> means stationed, settled, fixed, and it is not a paper-preservation formula. &ldquo;Settled&rdquo; is not &ldquo;preserved&rdquo; as an ink guarantee. The document&rsquo;s parody of &ldquo;Thy Bible, O Lord&rdquo; is rhetorically fair against the King James only use of the verse.</p>
+
+  <h3>C3 &middot; Psalm 12:6&ndash;7 Preserves the Godly Person, Not the Words</h3>
+  <p>Granted without reservation, and this is the flagship concession. In Psalm 12:7, &ldquo;them&rdquo; are the people of verses 1 and 5, the godly, the poor, the needy. The Hebrew suffixes (<em>tishmerem</em>, <em>titsrennu</em>) are masculine while &ldquo;words&rdquo; (<em>imrot</em>) is feminine, so &ldquo;them&rdquo; grammatically cannot be the words. The Septuagint reads &ldquo;us,&rdquo; and the Vulgate reads <em>nos</em>. The psalm promises that God will keep His people through a lying generation. It is not a promise about ink, and the tradition that pressed it into that service was wrong. The careful commentators agree with the document here, and we say so on the record, before the document reaches the point.</p>
+  <div class="callout">
+    <span class="lbl">The scope of the concession</span>
+    <p>One bad proof-text by one school does not mean the absence of preservation ground elsewhere. Fair reading does not stop at Psalm 12. It goes on to the dominical and apostolic method (Part 2) and the transmission record. And the psalm&rsquo;s own theology cuts for the standing text: God preserves the person through the generation while the wicked&rsquo;s words vanish, and verse 6&rsquo;s claim is that God&rsquo;s speech is unalloyed, silver refined seven times. Pure words against vanishing words is the semantic ground for trusting transmitted testimony.</p>
+  </div>
+
+  <h3>C4 &middot; &ldquo;Theological Necessity&rdquo; Is Inference Dressed as Doctrine</h3>
+  <p>Granted in full, and it is the document&rsquo;s best single point. The claim that God&rsquo;s character obliges Him to preserve a particular text is not read off the text. It is read into it. When it is taught as though it were Scripture, the commandment of men is taught as doctrine (Matthew 15:9). Most certainty about preservation rests on this unexamined sentiment, and the document catches it.</p>
+
+  <h3>C5 &middot; Inspiration and Preservation Are Formally Distinct</h3>
+  <p>Granted. No single text says &ldquo;inspired, therefore preserved.&rdquo; The rendering of 2 Timothy 3:16 as &ldquo;every scripture inspired of God is also profitable&rdquo; is a real critical-translation option, and the authorities cited for it are weighty.</p>
+
+  <h3>C6 &middot; 1 Corinthians 7:10 and 7:12 Are a Real Distinction</h3>
+  <p>Granted. There is a genuine difference between citing the Lord and giving faithful apostolic judgment within the same letter.</p>
+
+  <h3>C7 &middot; Conditional Covenant Promises Are Real</h3>
+  <p>Granted. 1 Samuel 2:30, Jeremiah 18:7&ndash;10, Exodus 32:14, Jonah 3:10, 1 Kings 21:29. Tier 1. God does rescind and relent within covenant.</p>
+
+  <h3>C8 &middot; God Permits Affliction and Withholds Revelation</h3>
+  <p>Granted. Job 1&ndash;2, Luke 22:31, 2 Corinthians 12:7, the Judges and captivity lists, Babel and Midian confusion, Amos 8:11, Micah 3:6&ndash;7, Psalm 74:9, Lamentations 2:9. All are Tier 1 descriptions of real judgments. The document&rsquo;s catalog here is authentic, and it is a needed corrective to sentimental dualism.</p>
+
+  <h3>C9 &middot; Preservation Is Not Universal Access</h3>
+  <p>Granted. Thousands of living languages have no Bible, and God gives nations over to blindness (Psalm 9:17; Romans 1; Amos 8:11). Withholding is not failing, and preservation and universal translation-access are different things.</p>
+
+  <h3>C10 &middot; Covenant Administrations Change Through History</h3>
+  <p>Granted. The covenant sequence is a fair description, and Hebrews 8:8&rsquo;s New Covenant does supersede the old administration. Tier 1.</p>
+
+  <h3>C11 &middot; Later Specific Revelation Governs Earlier General Command</h3>
+  <p>Granted, when the later text identifies its object. Colossians 2:16&ndash;17 names the feasts, Mark 7:19 the foods, Acts 10:15 the creatures. The principle is real. The document&rsquo;s application of it is the failure, handled at F4 and claim 23.</p>
+
+  <h3>C12 &middot; Bibliolatry Is a Live Danger</h3>
+  <p>Granted, and it deserves a hearing. Treating a translation, an edition, or a mastery of the text as a substitute for living dependence is a genuine vice, and the Lord&rsquo;s own rebuke of those who searched the Scriptures and missed Him stands over it still (John 5:39). The document&rsquo;s warning has force. But a text that testifies of Him must be trustworthy <em>to testify</em>, and the remedy the document proposes installs a second, quieter idol in the vacancy, which we handle at claim 20 and in the consequences ledger.</p>
+
+  <div class="callout">
+    <span class="lbl">The distinction that matters</span>
+    <p>These concessions defeat one school, the twentieth-century verbal-plenary-preservation and King James only textual tradition. Against that school the document largely succeeds, and we say so. The canonical, historical, apostolic case stands on entirely different legs, and the document never engages them. This is the difference between a fair audit and a school fight, and the reader must see it drawn.</p>
+  </div>
+</section>
+
+<!-- ============================ PART 5 ============================ -->
+<section class="section pb">
+  <h2 class="sec">5 &middot; The Twenty-Five Claims</h2>
+  <p>Each entry follows a fixed format: the claim in its strongest form, the texts cited, what is granted, where it fails, what decides it, the tier, and the verdict. The document&rsquo;s own numbering is followed, with one numbering slip noted once in the appendix.</p>
+
+  <div class="claim">
+    <h3>1 &middot; The Sovereignty of God</h3>
+    <div class="row"><span class="lbl">Steelman.</span> God is sovereign (Isaiah 46:10); His judgments vary in form; He is under no obligation to repeat a judgment-form; therefore no promise binds Him, and refusal to accept a present text-judgment is presumption.</div>
+    <div class="row"><span class="lbl">Granted.</span> C8. Sovereignty and varied judgments are Tier 1, and the pattern lists are authentic.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F1, F5, F8. Amos 8:11 is a famine of <em>hearing</em>, the withdrawal of living prophetic voice, never a description of corrupted scrolls. The withdrawal-judgments leave the written witness standing as the indictment: Daniel, inside the judgment era, dates by Jeremiah&rsquo;s scroll (Daniel 9:2), and the exile produced Scripture rather than corrupting it.</div>
+    <div class="row"><span class="lbl">What decides it.</span> Sovereignty includes God&rsquo;s sovereignty over His own oath. The oath-ladder: &ldquo;God is not a man, that he should lie&rdquo; (Numbers 23:19); &ldquo;the Strength of Israel will not lie nor repent: for he is not a man, that he should repent&rdquo; (1 Samuel 15:29), beside verse 11 in the same chapter, &ldquo;It repenteth me that I have set up Saul&rdquo; (administrative relenting and oath non-repentance inside one chapter); Ezekiel 24:14; Malachi 3:6; Titus 1:2; Hebrews 6:17&ndash;18. Psalm 89:34 stands as supporting: &ldquo;My covenant will I not break, nor alter the thing that is gone out of my lips.&rdquo;</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1.</div>
+    <div class="row"><span class="lbl">Verdict.</span> Permission argued, never proven. The sovereign who swears keeps His sworn word, by His own oath, in the text.</div>
+  </div>
+
+  <div class="claim">
+    <h3>2 &middot; Bible, Scripture, Word Are Not Synonyms</h3>
+    <div class="row"><span class="lbl">Steelman.</span> The terms have distinct ranges, and the substitution test is rhetorically decisive; therefore &ldquo;word&rdquo; in preservation promises is never safely assumed to mean &ldquo;Bible.&rdquo;</div>
+    <div class="row"><span class="lbl">Granted.</span> C1 in full. This is the document&rsquo;s strongest semantic point.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F3, F1. Range-as-exclusion: &ldquo;often not the text&rdquo; becomes &ldquo;never the text,&rdquo; which the inscription texts forbid. And the dominical counter-category: Mark 12:24 makes error about Scripture a matter of <em>not knowing</em> the text, not alteration of it.</div>
+    <div class="row"><span class="lbl">What decides it.</span> The same canon that gives Genesis 15:1&rsquo;s vision gives Exodus 24:4&rsquo;s inscription, Exodus 17:14&rsquo;s book-command, Luke 4:17&rsquo;s &ldquo;the place where it was written,&rdquo; Romans 9:17&rsquo;s &ldquo;the scripture saith,&rdquo; and Luke 10:26&rsquo;s &ldquo;how readest thou?&rdquo; The step from &ldquo;Torah existed and was read&rdquo; to &ldquo;the closed canon is preserved&rdquo; is a Tier 2 inference, and we do not inflate it. The stronger route up is the apostolic method plus the inscription texts that name writing.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 on inscription, Tier 2 on the move from Torah-read to canon-preserved.</div>
+    <div class="row"><span class="lbl">Verdict.</span> The semantic argument defeats the popular chain preservation-promise to &ldquo;word&rdquo; to your King James Bible outright. What it does not do is establish alteration. Range is not exclusion.</div>
+  </div>
+
+  <div class="claim">
+    <h3>3 &middot; Where Is It Preserved, Not With Ink</h3>
+    <div class="row"><span class="lbl">Steelman.</span> Most preservation texts name no location, and those that do name heart, mind, mouth, or heaven. Recording commands are event-memorials, not canon-preservation promises. Therefore no promise locates preservation in the book.</div>
+    <div class="row"><span class="lbl">Granted.</span> C2. Location-silence is real, and the survey of the recording commands is fair.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F2, F3. The document never asks where the heart gets its word. From the preached and read text: &ldquo;faith cometh by hearing, and hearing by the word of God&rdquo; (Romans 10:17); &ldquo;Let the word of Christ dwell in you richly&rdquo; (Colossians 3:16); &ldquo;hold the traditions, which ye have been taught, whether by word, or our epistle&rdquo; (2 Thessalonians 2:15).</div>
+    <div class="row"><span class="lbl">What decides it.</span> &ldquo;Not with ink&rdquo; (2 Corinthians 3:3) contrasts covenantal inscription-quality, the Spirit on the heart against letters on stone, and does not repudiate ink. Paul writes with ink and says so: 1 Corinthians 16:21; Galatians 6:11; Colossians 4:18; and 2 Thessalonians 3:17, &ldquo;the salutation of Paul with mine own hand, which is the token in every epistle.&rdquo; The apostle&rsquo;s physical handwriting is the church&rsquo;s authentication token.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (2 Thessalonians 3:17, the ink-authentication cluster).</div>
+    <div class="row"><span class="lbl">Verdict.</span> The location lists locate covenant-internalization; they do not deny documentary transmission, and the apostles authenticate by ink.</div>
+  </div>
+
+  <div class="claim">
+    <h3>4 &middot; Preserved but Inaccessible</h3>
+    <div class="row"><span class="lbl">Steelman.</span> Over a thousand living languages have no Bible. God gives nations over to blindness. Therefore preservation is not access, and an inaccessible-yet-preserved word is an established divine pattern.</div>
+    <div class="row"><span class="lbl">Granted.</span> C9. Preservation and universal translation-access are different things.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F3, F1. The actual claim concerns copies already delivered and possessed, retroactive alteration of the archive, and no precedent text describes that. The category is withholding versus corrupting. And Isaiah 29:11&ndash;12 cuts against the document: the sealed book is given to the literate who cannot read it and the illiterate who cannot, so the word stands while the people are shut out. Israel&rsquo;s judgment, not the scroll&rsquo;s corruption.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (Isaiah 29&rsquo;s own structure).</div>
+    <div class="row"><span class="lbl">Verdict.</span> True distinction, wrong application. Inaccessibility is not alteration, and nothing here touches a delivered text&rsquo;s integrity.</div>
+  </div>
+
+  <div class="claim">
+    <h3>5 &middot; God Has Removed His Word Before</h3>
+    <div class="row"><span class="lbl">Steelman.</span> A mountain of precedent: Amos 8:11; Lamentations 2:9; Micah 3:6&ndash;7; Psalm 74:9; 1 Samuel 3:1; 2 Chronicles 15:3; Ezekiel 7:26; Hosea 4:6; Ezekiel 14:4, 9; 1 Kings 22:19; Numbers 22:20; Psalm 18:26. God withdraws, withholds, and even deceives false prophets, so a God willing to remove His word is a God who could allow its alteration.</div>
+    <div class="row"><span class="lbl">Granted.</span> C8. Every listed text is a word-withdrawal or prophetic-silence judgment, Tier 1, and God does deceive false prophets who have earned it.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F5, F3, F8. The entire list is prophetic-revelation withdrawal, with zero manuscript-corruption events. Read the entries: &ldquo;no open vision,&rdquo; &ldquo;no prophet,&rdquo; &ldquo;the law is no more [taught],&rdquo; &ldquo;the law shall perish from the priest&rdquo; (Ezekiel 7:26, from the <em>teacher</em>, not from the scroll). The withdrawal is of living instruction and fresh vision.</div>
+    <div class="row"><span class="lbl">What decides it.</span> The counter-witness inside the judgment texts: Lamentations 2:9 is written in a book that survives to testify; Daniel dates by Jeremiah&rsquo;s scroll; the exile produced more canonical text, not corrupted text. And Deuteronomy 31:26 places the book beside the ark as a witness against Israel: the scroll outlives the nation&rsquo;s fidelity. The category gap is total: silence versus erasure.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (the list&rsquo;s own wording), Tier 2 (the surviving-witness pattern).</div>
+    <div class="row"><span class="lbl">Verdict.</span> The strongest-sounding precedent list in the document, and zero entries touch inscription integrity.</div>
+  </div>
+
+  <div class="claim">
+    <h3>6 &middot; God Can Do It Differently</h3>
+    <div class="row"><span class="lbl">Steelman.</span> Ecclesiastes 11:5; Isaiah 43:18&ndash;19; John 3:8. God is under no obligation to repeat judgment-forms, so the withdrawal precedents license a new form: text-corruption.</div>
+    <div class="row"><span class="lbl">Granted.</span> C8. Novelty and inscrutability are Tier 1.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F1, F8. This is the universal possibility-prover: it proves the thesis possible and its opposite possible, and therefore proves nothing. It gives every claim equal support, including claims the document itself rejects.</div>
+    <div class="row"><span class="lbl">What decides it.</span> Deuteronomy 29:29: &ldquo;The secret things belong unto the LORD our God: but those things which are revealed belong unto us and to our children for ever.&rdquo; The boundary guards revelation&rsquo;s delivery: revealed things are given <em>as revealed</em>, to be kept. The verse the document needs is the verse against it.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (Deuteronomy 29:29).</div>
+    <div class="row"><span class="lbl">Verdict.</span> Permission at best, and self-canceling as an argument.</div>
+  </div>
+
+  <div class="claim">
+    <h3>7 &middot; God Told Us He Was Going to Do This</h3>
+    <div class="row"><span class="lbl">Steelman.</span> If God forewarned a season of satanic lying wonders (2 Thessalonians 2:9), the beast making war on the saints (Revelation 13:7), and the little horn thinking to change times and laws (Daniel 7:25), then later prophetic warning governs earlier preservation promises, and the warning would be meaningless if alteration were impossible (Revelation 22:18). The specific prophecy controls the general promise.</div>
+    <div class="row"><span class="lbl">Granted.</span> C11, the principle, when the later text identifies its object. And the admission that Revelation 22:18 proves tampering is a real, culpable transgression.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F4, F6, F9. The four warning-texts never name Scripture manuscripts as their object.</div>
+    <div class="row"><span class="lbl">What decides it, the object test applied to each.</span> Daniel 7:25 names the object in its own context: the horn speaks against the Most High, wears out the saints, and thinks to change times and laws. The textual object is Tier 1; the historical identification (Antiochus IV, Rome in extension) is Tier 2, and we do not let the identification carry Tier 1 weight. The text nowhere says &ldquo;Scripture manuscripts.&rdquo; Daniel 8:11 has &ldquo;by him the daily sacrifice was taken away,&rdquo; the appointed-worship referent. Second Thessalonians 2:9&rsquo;s lying wonders are aimed at those who &ldquo;received not the love of the truth,&rdquo; so delusion is judgment on truth-refusers, not a license to rewrite truth. Revelation 13:7&rsquo;s war on the saints is martyrdom, and Revelation 13:10 immediately interprets it: &ldquo;here is the patience and the faith of the saints.&rdquo; Revelation 22:18&ndash;19 is a covenant-document sanction formula (compare Deuteronomy 4:2; 12:32) that presupposes a fixed text as its referent, and Revelation 1:3 blesses the one who reads the words of the prophecy, a blessing that rests on a stable, copyable text.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 on Daniel 7:25&rsquo;s named object, Tier 2 on the Antiochus and Rome identification, Tier 1 on Revelation 13:10 and 1:3.</div>
+    <div class="row"><span class="lbl">Verdict.</span> The engine-claim of the whole document, and it fails the object test at every citation. Principle granted; application unproven.</div>
+  </div>
+
+  <div class="claim">
+    <h3>8 &middot; The Devil Does Not Have That Much Power</h3>
+    <div class="row"><span class="lbl">Steelman.</span> God is the permitter, Satan the agent (Job 1:12; Revelation 13:7; Luke 22:31; 2 Corinthians 12:7; the Judges and captivity lists; the evil-spirit texts). Judgment begins at the house of God, and the hedge can be lifted.</div>
+    <div class="row"><span class="lbl">Granted.</span> C8. The entire list is authentic permitted-evil material, Tier 1, and it is the document&rsquo;s strongest catalog and a needed corrective to sentimental dualism.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F5, F1. Every entry is affliction, persecution, death, or captivity, and none is content-corruption of covenant documents.</div>
+    <div class="row"><span class="lbl">What decides it.</span> What Satan is given authority over in Scripture: Job&rsquo;s family, health, and possessions; the sifting of Peter, and even there bounded by intercession (&ldquo;I have prayed for thee, that thy faith fail not&rdquo;); the saints&rsquo; bodies. Never once the text of the covenant. And the devil&rsquo;s documented strategy with words is <em>counterfeit</em>, not editing: false prophets (Deuteronomy 13:3), detectable by the standing text. &ldquo;To the law and to the testimony: if they speak not according to this word, it is because there is no light in them&rdquo; (Isaiah 8:20). A corrupted standard cannot detect counterfeits; the biblical war on words presupposes the integrity of the arsenal.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (the catalog&rsquo;s own content), Tier 1 (Isaiah 8:20).</div>
+    <div class="row"><span class="lbl">Verdict.</span> Granted catalog, wrong inference. The devil&rsquo;s portfolio is persecution and counterfeit, not archival editing.</div>
+  </div>
+
+  <div class="claim">
+    <h3>9 &middot; Inspired Does Not Mean Preserved</h3>
+    <div class="row"><span class="lbl">Steelman.</span> No text says &ldquo;inspired therefore preserved.&rdquo; The more probable rendering of 2 Timothy 3:16 is &ldquo;every scripture inspired by God is also profitable,&rdquo; which opens the possibility that some scriptures are not inspired. And Paul distinguishes &ldquo;not I, but the Lord&rdquo; from &ldquo;I, not the Lord.&rdquo;</div>
+    <div class="row"><span class="lbl">Granted.</span> C5, C6.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F1, F8. From &ldquo;every inspired scripture is profitable&rdquo; to &ldquo;some scripture is not inspired&rdquo; is a non sequitur; the church received 1 Corinthians 7 as Scripture from the start, verse 12 included.</div>
+    <div class="row"><span class="lbl">What decides it.</span> The document never quotes the passage&rsquo;s second half: &ldquo;that the man of God may be perfect, throughly furnished unto all good works&rdquo; (2 Timothy 3:16&ndash;17), a functional sufficiency claim about the delivered text. And 3:15 points Timothy to texts he has known for decades, assuming continuity of access and content across a lifetime. 1 Corinthians 7:12 read in full, with verse 25, distinguishes citing Jesus from giving faithful apostolic judgment, both within the letter the church received as canonical. And the preservation case here is not doctrine but evidence: the distribution test and the transmission record.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (2 Timothy 3:15&ndash;17), Tier 2 (the transmission record).</div>
+    <div class="row"><span class="lbl">Verdict.</span> The critique of a doctrinal syllogism lands; the inference to possibly-uninspired, possibly-unpreserved scripture is a non sequitur, and the positive case stands on evidence, not sentiment.</div>
+  </div>
+
+  <div class="claim">
+    <h3>10 &middot; God Does Not Change, Does Not Mean the Bible Does Not Change</h3>
+    <div class="row"><span class="lbl">Steelman.</span> God is immutable; His creations are not. The heavens &ldquo;shall be changed, as a vesture&rdquo; (Hebrews 1:10&ndash;12). &ldquo;Jesus Christ the same yesterday, and to day, and for ever&rdquo; is not a force-field around a book.</div>
+    <div class="row"><span class="lbl">Granted.</span> C12&rsquo;s first half. God is not a book, creation is mutable, and the bibliolatry warning has force.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F3, F1. Mutability of the cosmic order is not retroactive alteration of covenant testimony. Hebrews 1:10&ndash;12&rsquo;s own argument is an announced eschatological renewal of the created order, not a quiet corruption. Announced transformation and silent editing are opposite categories.</div>
+    <div class="row"><span class="lbl">What decides it.</span> God&rsquo;s immutability is precisely <em>why</em> His covenant word is reliable, and the document severs that nerve: Numbers 23:19; Malachi 3:6 (&ldquo;I am the LORD, I change not; therefore ye sons of Jacob are not consumed,&rdquo; changelessness grounding covenant mercy); Titus 1:2; Hebrews 6:17&ndash;18.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (Titus 1:2; Hebrews 6:18; Malachi 3:6).</div>
+    <div class="row"><span class="lbl">Verdict.</span> Granted distinction, severed nerve. The unchanging God&rsquo;s speech-acts are guaranteed by His unchangeability, which is the gospel&rsquo;s own ground in Hebrews 6.</div>
+  </div>
+
+  <div class="claim">
+    <h3>11 &middot; &ldquo;God Cannot Lie&rdquo; Is Not an Argument</h3>
+    <div class="row"><span class="lbl">Steelman.</span> The syllogism fails at premise one. If no text promises Bible-preservation, then &ldquo;God cannot lie&rdquo; never engages the question. God never promised to preserve the Bible, therefore a changing Bible makes Him no liar.</div>
+    <div class="row"><span class="lbl">Granted.</span> The conditional&rsquo;s form is valid.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F8. Premise one is re-asserted, never tested.</div>
+    <div class="row"><span class="lbl">What decides it, the chain that does not need 1 Peter as a sea-anchor.</span> God cannot lie (Titus 1:2; Hebrews 6:18). He is not a man that He should lie or repent of an oath (Numbers 23:19; 1 Samuel 15:29, with verse 11 in the same chapter as the class distinction). His sworn covenant speech does not fail (Psalm 89:34). The apostles argue from a stable citation-text (a finding). The physical record shows ordinary distributed variation, not retro-edits (a finding). First Peter 1:23&ndash;25 stands as a supporting witness, applying Isaiah 40:8 to the gospel as preached, answering &ldquo;it does not say where&rdquo; at the level of message in transmission.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (Titus 1:2; Hebrews 6:18; Numbers 23:19; 1 Samuel 15:29; the apostolic method), supporting Psalm 89:34, Tier 2 (1 Peter 1:23&ndash;25).</div>
+    <div class="row"><span class="lbl">Verdict.</span> &ldquo;God cannot lie&rdquo; is an argument once the object of the speech-act is identified, and we identify it by apostolic practice and the oath-texts, not by inflating 1 Peter.</div>
+  </div>
+
+  <div class="claim">
+    <h3>12 &middot; God Is Willing to Appear Unrighteous</h3>
+    <div class="row"><span class="lbl">Steelman.</span> God lifted Job&rsquo;s hedge and let Satan wreck a righteous man; God commanded Abraham to kill his own son. God appears unrighteous to limited sight to test His servants, and this thesis is that test for the bride.</div>
+    <div class="row"><span class="lbl">Granted.</span> C8&rsquo;s testing subset. Job and the Akedah are real tests (&ldquo;though he slay me, yet will I trust in him,&rdquo; Job 13:15).</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F5, analogy inversion. Both of the document&rsquo;s own cases resolve by disclosure. Job&rsquo;s God answers out of the whirlwind, four chapters of speech, restoration, and a rebuke of the friends (Job 42:7). Abraham&rsquo;s test resolves with provision: &ldquo;God will provide himself a lamb&rdquo; (Genesis 22:8, 14), read as resurrection logic in Hebrews 11:19.</div>
+    <div class="row"><span class="lbl">What decides it.</span> The structure here is the inverse: permanent, unresolvable ambiguity, no disclosure, no whirlwind, detection by private memory. Job&rsquo;s God speaks; this framework&rsquo;s God is silent forever while His text decays. A test requires a testable criterion, and Job got one and Abraham got one. Here the criterion is memory plus consensus, which is exactly what Jeremiah 17:9 warns about, a verse the document never quotes.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (Job 38&ndash;42; Genesis 22:8, 14; Hebrews 11:19).</div>
+    <div class="row"><span class="lbl">Verdict.</span> Borrowed reverence, inverted structure. The biblical test resolves; this test never does.</div>
+  </div>
+
+  <div class="claim">
+    <h3>13 &middot; God Is the Author of Confusion</h3>
+    <div class="row"><span class="lbl">Steelman.</span> First Corinthians 14:33 says God is not the author of confusion, yet God confounded Babel (Genesis 11:7&ndash;9) and turned Midian&rsquo;s swords on each other (Judges 7:22). A Babel-type confusion-judgment on a Bible-idolizing church is conceivable.</div>
+    <div class="row"><span class="lbl">Granted.</span> C8&rsquo;s confusion subset. Babel is Tier 1, and the church-idolatry critique is a real word to the church.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F5, F1. Babel&rsquo;s confusion was public, evident, and halted the project, and everyone knew they could not understand each other. The &ldquo;confusion&rdquo; claimed here is undetectable to most of the church and detectable only by the movement&rsquo;s memory-standards.</div>
+    <div class="row"><span class="lbl">What decides it.</span> What God confused at Babel was the living speech of a unified rebellion, halting the tower. He did not edit the prior testimony of God to humanity; the revelations to Adam, Enoch, and Noah were not confounded. Confusion halted rebellion; it did not corrupt the archive. And Amos 3:7: God&rsquo;s judgments come with prophetic announcement, and this one has no prophet, only retroactive memory claims. First Corinthians 14:33&rsquo;s own context is order and edification in the assembly, &ldquo;let all things be done decently and in order&rdquo; (14:40): the apostolic assembly is built on public, testable intelligibility, not private gnosis.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (Genesis 11&rsquo;s public character; 1 Corinthians 14:40).</div>
+    <div class="row"><span class="lbl">Verdict.</span> Real judgment-catalog entry, wrong target. God&rsquo;s confusions halt rebellion publicly; they do not edit covenant documents secretly.</div>
+  </div>
+
+  <div class="claim">
+    <h3>14 &middot; Theological Necessity Is a Guess</h3>
+    <div class="row"><span class="lbl">Steelman.</span> The King James only tradition presents inference as doctrine, and Matthew 15:9 rebukes the commandments of men taught as doctrine. Most certainty about preservation rests on this unexamined sentiment.</div>
+    <div class="row"><span class="lbl">Granted.</span> C4 in full, at length. This is the document&rsquo;s best single point. (We cite the works and quote the substance; we do not manufacture a page number we cannot verify.)</div>
+    <div class="row"><span class="lbl">Where it fails.</span> Scope error, not modal error. The document refutes a school and treats the victory as covering every ground for textual stability. Note also the special pleading: the document uses necessity-reasoning when convenient (&ldquo;it only makes sense that He would have gotten it to us sooner&rdquo;), which is necessity in reverse.</div>
+    <div class="row"><span class="lbl">What decides it.</span> The two load-bearing legs the document never touches: the apostolic method and the transmission record with the distribution test. None of this is theological necessity. Our case never says God <em>must</em>. It says the apostles argued as if the wording held, and the physical record shows that it did.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 1 as critique of the preservation school, Tier 3 as support for its own thesis.</div>
+    <div class="row"><span class="lbl">Verdict.</span> Granted in full, and irrelevant to the standing case. The document wins a battle against a school and claims a war against the apostles&rsquo; own method.</div>
+  </div>
+
+  <div class="claim">
+    <h3>15 &middot; Providential Preservation Is Not an Argument</h3>
+    <div class="row"><span class="lbl">Steelman.</span> God&rsquo;s past providential ordering of transmission does not guarantee its continuance. Track record is not a promise.</div>
+    <div class="row"><span class="lbl">Granted.</span> As a logical point, track record is not a promise.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> Scope and special pleading. The document&rsquo;s own position rests on a far stronger providence-claim than its opponents&rsquo;: a global, simultaneous, tradition-wide retro-edit of every physical and quoted witness, undetectable except by memory. Providence is rejected when it supports stability and assumed when it supports alteration.</div>
+    <div class="row"><span class="lbl">What decides it.</span> Our ground is not providence by default but commanded transmission: &ldquo;hold fast the form of sound words&rdquo; (2 Timothy 1:13); &ldquo;continue thou in the things which thou hast learned&rdquo; (2 Timothy 3:14); &ldquo;hold the traditions&rdquo; (2 Thessalonians 2:15); &ldquo;the faith which was once delivered unto the saints&rdquo; (Jude 3), a fixed deposit handed over.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (the commands).</div>
+    <div class="row"><span class="lbl">Verdict.</span> Granted logic, wrong battlefield. The real ground is commanded transmission plus evidenced continuity.</div>
+  </div>
+
+  <div class="claim">
+    <h3>16 &middot; Perseverance of the Saints Is Not an Argument</h3>
+    <div class="row"><span class="lbl">Steelman.</span> Ephesians 1:13&rsquo;s sealing promises the saint&rsquo;s perseverance, not the text&rsquo;s. Just because you have been sealed does not mean the Bible has been sealed.</div>
+    <div class="row"><span class="lbl">Granted.</span> Category-correct. Sealing texts should not be used as preservation proof-texts, and the abuse is real.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> Irrelevance. Correcting a proof-text abuse does no work for the alteration thesis. This entry is the template for the document&rsquo;s method: win against the opponent&rsquo;s weakest proof-text, then treat the win as evidence for the thesis.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 1 as critique, no probative value for the thesis.</div>
+    <div class="row"><span class="lbl">Verdict.</span> Fully granted; zero probative value for the thesis.</div>
+  </div>
+
+  <div class="claim">
+    <h3>17 &middot; Psalm 12 Is Not a Preservation Promise</h3>
+    <div class="row"><span class="lbl">Steelman.</span> The psalm&rsquo;s subject is stated in verse 1, the godly man ceasing, and in verse 5, God arising for the poor and needy. Verse 6 endorses the promise&rsquo;s quality, silver refined seven times. Verse 7&rsquo;s &ldquo;them&rdquo; are the persons of verses 1 and 5, and the commentators agree.</div>
+    <div class="row"><span class="lbl">Granted.</span> C3, in full, without reservation. The King James only use of Psalm 12:6&ndash;7 as a paper-preservation proof-text is exegetically indefensible, and we say so before the document gets to.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> Nothing, as exegesis. But see the incoherence ledger: the document later uses Psalm 12 as its first &ldquo;preservation promise&rdquo; in its modifier table, after spending this entry proving it is not one.</div>
+    <div class="row"><span class="lbl">What decides it.</span> The concession&rsquo;s scope: one bad proof-text by one school is not the absence of preservation ground elsewhere. And the psalm&rsquo;s own theology cuts for the standing text: God preserves the person through the generation while the wicked&rsquo;s words vanish, and verse 6 claims God&rsquo;s speech is unalloyed. Pure words against vanishing words.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 1, and correct. Our reading: identical.</div>
+    <div class="row"><span class="lbl">Verdict.</span> Conceded in full. Fair reading, not sentiment, decides texts, and fair reading does not stop here.</div>
+  </div>
+
+  <div class="claim">
+    <h3>18 &middot; The Bible Has Been Changing From Its Inception</h3>
+    <div class="row"><span class="lbl">Steelman.</span> Seven covenants, each introducing changes. Hebrews 8:8: &ldquo;I will make a new covenant,&rdquo; and a new covenant is a changed covenant.</div>
+    <div class="row"><span class="lbl">Granted.</span> C10. The covenant sequence is real, and the New Covenant does supersede the old administration. Tier 1.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F3 at its purest, the deepest category error in the document: administration-change is not document-change.</div>
+    <div class="row"><span class="lbl">What decides it.</span> The document&rsquo;s own proof-text refutes it. Hebrews 8:8 quotes Jeremiah 31, and the Letter to the Hebrews exists because Jeremiah&rsquo;s promise was still available to be cited. A vanished or retro-edited oracle could not prove a changed covenant. Note precisely which Jeremiah: Hebrews quotes the Septuagint recension, shorter than the Masoretic, so we say a recoverable written promise, attested in more than one recension, is still there to be quoted. That is distributed transmission, not silent editing. And the pattern of every covenant transition is the same: announced in advance, in writing, within the canon, and the superseded material preserved at full length beside the new. The Bible is not one contract that mutates; it is a covenant archive whose amendments are notarized in the text.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (Hebrews 8&rsquo;s own citation-method).</div>
+    <div class="row"><span class="lbl">Verdict.</span> Hebrews 8:8 proves textual stability, not textual mutability. The document&rsquo;s citadel is our exhibit.</div>
+  </div>
+
+  <div class="claim">
+    <h3>19 &middot; The Law of First Mention</h3>
+    <div class="row"><span class="lbl">Steelman.</span> The first occurrence of &ldquo;the word of the LORD&rdquo; (Genesis 15:1) is a vision-conversation with Abram, not a text. First mention helps fix a term&rsquo;s true meaning, therefore &ldquo;word of the LORD&rdquo; denotes living encounter, not written communication.</div>
+    <div class="row"><span class="lbl">Granted.</span> C1-adjacent. First occurrence can illuminate a term&rsquo;s semantic seed, and Genesis 15:1 is indeed a vision-reception.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F3, the first-mention fallacy. A term&rsquo;s earliest sense does not exhaust its later senses, and the document&rsquo;s own hedge, that first mention is &ldquo;often relied upon to help determine,&rdquo; concedes help, not fix.</div>
+    <div class="row"><span class="lbl">What decides it.</span> The canon&rsquo;s own usage distribution. The same corpus that records &ldquo;the word of the LORD came in a vision&rdquo; records the inscription of that word: Exodus 17:14; Exodus 24:4, &ldquo;Moses wrote all the words of the LORD&rdquo;; Isaiah 30:8; Jeremiah 30:2; Habakkuk 2:2. And the canonical pattern is revelation, then inscription, then public reading, then transmission (Deuteronomy 31:9&ndash;13; Nehemiah 8; 2 Kings 22). Applied consistently, first mention would also fix every other term in the document&rsquo;s argument, and dismantle it.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (Exodus 24:4; Jeremiah 30:2; Habakkuk 2:2).</div>
+    <div class="row"><span class="lbl">Verdict.</span> Heuristic honored, fallacy exposed. The same canon that gives Genesis 15&rsquo;s vision gives Exodus 24&rsquo;s inscription.</div>
+  </div>
+
+  <div class="claim">
+    <h3>20 &middot; God Breaks Down So That He May Build Up</h3>
+    <div class="row"><span class="lbl">Steelman.</span> Jeremiah 1:10, Ecclesiastes 3:1&ndash;3, Jeremiah 18:7. God dismantles idolatrous systems, and the modern church has made the Bible a monument to human certainty. Supernatural destabilization of the text would fit the established pattern of divine disruption aimed at humbling arrogance.</div>
+    <div class="row"><span class="lbl">Granted.</span> C8&rsquo;s dismantling subset. God does dismantle, Tier 1, and the critique deserves a hearing. Preach that part straight, because the church needs it.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F5. The dismantling pattern is named, announced, public, and covenantal, and it leaves the written testimony standing as the record of the dismantling.</div>
+    <div class="row"><span class="lbl">What decides it.</span> Every major judgment produced and preserved canonical testimony rather than corrupting it. The exile produced Ezekiel, Daniel, and Lamentations. Jeremiah&rsquo;s own scroll survived the demolition of the nation he announced it to, and was rewritten when destroyed (Jeremiah 36:32), with the addition clause handled carefully: &ldquo;there were added besides unto them many like words,&rdquo; which is expansion of the same substance under prophetic command, a new edition of the same word, not silent alteration of the old one. Josiah&rsquo;s reformation was triggered by a recovered intact book (2 Kings 22): the buried book outlived the corrupt temple. The pattern is that God tears down human systems and keeps the books. The claim is that God tears down the books to humble human systems, the inversion of every attested case.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 2 (the archive pattern across Jeremiah 36, 2 Kings 22, and AD 70).</div>
+    <div class="row"><span class="lbl">Verdict.</span> Real pattern, inverted application. The biblical demolitions are archived in the very text they left standing.</div>
+  </div>
+
+  <div class="claim">
+    <h3>21 &middot; The Word of the Lord Grew</h3>
+    <div class="row"><span class="lbl">Steelman.</span> Acts 19:20, the word grew mightily and prevailed. A static document does not grow, therefore &ldquo;word of the Lord&rdquo; means the message&rsquo;s influence, not the text.</div>
+    <div class="row"><span class="lbl">Granted.</span> C1. In Acts 19:20 the reference is multiplying influence.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F3. One non-referential sense is not exclusion of referential senses elsewhere.</div>
+    <div class="row"><span class="lbl">What decides it.</span> What the growth was built on: the fixed apostolic message. &ldquo;The form of sound words&rdquo; (2 Timothy 1:13); &ldquo;the faith once delivered&rdquo; (Jude 3); &ldquo;For I delivered unto you first of all that which I also received&rdquo; (1 Corinthians 15:3). Growth requires the identity of the thing growing, a determinate content that multiplies as itself. A drifting word cannot grow; it can only dissolve. And the passage&rsquo;s own context is the burning of occult books (Acts 19:19): God&rsquo;s word grows by public power while counterfeit texts are eradicated, the opposite of letting His own archive silently decay.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (1 Corinthians 15:3; Jude 3).</div>
+    <div class="row"><span class="lbl">Verdict.</span> Growth presupposes identity. Acts 19 witnesses to fixed-content multiplication, not text-mutability.</div>
+  </div>
+
+  <div class="claim">
+    <h3>22 &middot; It Pleased God Not to Give Us a Bible</h3>
+    <div class="row"><span class="lbl">Steelman.</span> Thousands of years of history, a Bible for a fraction of it, and God not as worked up about a flawless Bible as you are. He chose vulnerable media, and concealment is His way (Acts 17:27; Proverbs 25:2). Therefore He prefers dependence to textual certainty, and may have withdrawn the book.</div>
+    <div class="row"><span class="lbl">Granted.</span> C12-adjacent. God does hide, and the vulnerable-media observation is true: only the Decalogue was directly inscribed by God.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> Factual errors and F3. The dependence-versus-text framing is a false dichotomy: the text is the God-given <em>instrument</em> of dependence. And the arithmetic, on the record: Scripture from Moses is roughly three thousand three hundred years, not a few hundred; and &ldquo;no single bound volume&rdquo; is not &ldquo;no Scripture.&rdquo; Israel had Torah for a millennium and more before Christ, and Christ and the apostles argued &ldquo;It is written&rdquo; from a settled text.</div>
+    <div class="row"><span class="lbl">What decides it.</span> The dependence theme properly located: &ldquo;man doth not live by bread alone, but by every word that proceedeth out of the mouth of the LORD&rdquo; (Deuteronomy 8:3), the verse Christ wielded in temptation, from the assumed-stable text (Matthew 4:4). And Deuteronomy 30:11&ndash;14: the commandment &ldquo;is very nigh unto thee, in thy mouth, and in thy heart,&rdquo; the written word&rsquo;s nearness as the instrument of covenant dependence, not its rival. The vulnerable-media observation, inverted: God&rsquo;s copying economy produced the most-attested, most-recoverable text of antiquity. The only directly God-inscribed medium, the stone tablets, drops from ordinary view (1 Kings 8:9 still has them in the ark at Solomon&rsquo;s temple), and the humanly-copied scroll is what the church actually holds. Preservation by copying is God&rsquo;s economy, not His negligence. Compare Jeremiah 32:14, a deed commanded into an earthen vessel that it may continue many days, an illustration of commanded physical preservation, not a Scripture-preservation promise. The Qumran jars that kept scrolls two thousand years are the same economy.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (Deuteronomy 8:3), Tier 2 (the transmission record).</div>
+    <div class="row"><span class="lbl">Verdict.</span> Arithmetic exposed; the dichotomy dissolved; the vulnerable medium inverted. The copied scroll is what endured in the church&rsquo;s hands.</div>
+  </div>
+
+  <div class="claim">
+    <h3>23 &middot; Promises Can Be Modified</h3>
+    <div class="row"><span class="lbl">Steelman.</span> Scripture modifies Scripture: Leviticus 23:4&ndash;5 with Colossians 2:16; Leviticus 3:17 with Romans 14:20; Exodus 20:13 with Matthew 5:21&ndash;22; Leviticus 11 with Acts 10. The full-counsel-of-God principle: later passages trump earlier ones. Applied, preservation promises are trumped by modifiers, Psalm 12 by Daniel 7:25, Matthew 5:17 by Amos 8:11, Psalm 119:89 by Revelation 13, Isaiah 40:8 by 2 Thessalonians 2:9.</div>
+    <div class="row"><span class="lbl">Granted.</span> C11. Real in-canonical modification exists, and the principle is sound when the later text identifies its object: Colossians 2:17 names the feasts as a shadow; Mark 7:19 declares foods purged; Acts 10:15 names the creatures.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F4, the entire claim, plus the incoherence ledger, plus T7, the gospel-ground destruction.</div>
+    <div class="row"><span class="lbl">What decides it, the mechanism&rsquo;s four joints, each broken.</span> The New Testament&rsquo;s modification-method has four marks: the modifier is itself inspired canonical speech; it names its object; the older text is not erased but preserved and re-read; and the modifier enters the same canon. The document&rsquo;s modifiers fail all four: they are uninspired reader-pairings; their objects are never stated, since Daniel 7:25, Amos 8:11, 2 Thessalonians 2:9, and Revelation 13 never name Scripture manuscripts; the &ldquo;modified&rdquo; text still says what it says, and nothing in the physical record changed; and there is no canonical record of any alteration. The proves-too-much argument at full strength: if uninspired readers may void promises by pairing object-less texts, the same mechanism voids the resurrection promises, the atonement, and &ldquo;whosoever believeth,&rdquo; promises the document still needs. A voiding mechanism without a canonical stopping point destroys the gospel&rsquo;s ground; it must stop somewhere in the text, or it stops everywhere. And the dominical line to use is Matthew 24:35, not Matthew 5:17&ndash;18, whose own terminus is the opening claim 25 needs. No inspired voice says the dominical saying is rescinded; uninspired readers positing the override are doing what the document&rsquo;s own Matthew 15:9 condemns. The internal confession: the document admits the pairing is rhetorical, using Psalm 12 as its first preservation promise two chapters after proving it is not one. The flagship modifier modifies nothing.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (the four marks of genuine New Testament modification; Mark 12:24&rsquo;s error-taxonomy).</div>
+    <div class="row"><span class="lbl">Verdict.</span> The central mechanism fails at every joint: silent pairing, object-less modification, a self-contradicted flagship, and a mechanism that eats the gospel. The wall is hollow.</div>
+  </div>
+
+  <div class="claim">
+    <h3>24 &middot; Promises Can Be Rescinded</h3>
+    <div class="row"><span class="lbl">Steelman.</span> First Samuel 2:30, Jeremiah 18:7&ndash;10, Genesis 6:5&ndash;7, Exodus 32:9&ndash;14, 1 Kings 21:29, Jonah 3:10. God takes back what He has promised, so He may be taking back the Bible.</div>
+    <div class="row"><span class="lbl">Granted.</span> C7. Rescission and relenting are real, Tier 1. Jeremiah 18 is the covenantal mechanics chapter, and the 1 Samuel 2:30 reading is accurate, with &ldquo;them that honour me I will honour&rdquo; stated within the rescission text itself.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F3, rescission-class versus promise-class, and F8.</div>
+    <div class="row"><span class="lbl">What decides it, the class-analysis.</span> The class-marks of every rescinded promise in the document&rsquo;s own list: it is conditional within covenant, announced terms under the Leviticus 26 and Deuteronomy 28 blessing-curse structure; it is administrative, a priestly house, a nation&rsquo;s destruction, a generation&rsquo;s doom; it is prophet-announced, arriving through the standing word-channel, which proves the channel even as the promise turns; and it is recorded in the canon, since the rescissions are themselves preserved Scripture. The class the preservation texts belong to is the sworn-oath class: Numbers 23:19; 1 Samuel 15:29 with verse 11 in the same chapter; Ezekiel 24:14; Malachi 3:6; Titus 1:2; Hebrews 6:17&ndash;18. Psalm 89:34&ndash;37 stands as supporting, with 89:38&ndash;39 quoted in the same breath, since the lament is covenant-internal, the throne empty and the crown in the dust, not a narrator&rsquo;s verdict that God unsaid verses 34 through 37; the Davidic line is carried through that exile to Messiah, and 89:52 holds. And the theological payoff, stated once: God&rsquo;s rescissions are His faithfulness operating on conditionals, and His oath-class non-rescission is His faithfulness operating on Himself. A book that records its own rescissions is not a book being silently edited; the rescissions are in the book.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3. Counter: Tier 1 (Numbers 23:19; 1 Samuel 15:11, 29; Ezekiel 24:14; Malachi 3:6; Titus 1:2; Hebrews 6:17&ndash;18).</div>
+    <div class="row"><span class="lbl">Verdict.</span> Rescission is real in its class; the preservation texts are oath-class. The document&rsquo;s strongest texts describe the conditional mechanics the canon itself publishes.</div>
+  </div>
+
+  <div class="claim">
+    <h3>25 &middot; Promises Can Have Time Limits</h3>
+    <div class="row"><span class="lbl">Steelman.</span> Daniel 12:4 seals the book to the time of the end, and Revelation 22:10 does not seal it. The Daniel 7:25 prediction was sealed until now, therefore the preservation promises carried a hidden expiry that has now lapsed. &ldquo;The time of the end&rdquo; is not the end of time, and the time of the end is probably right now. We are in Satan&rsquo;s loosed little season after the millennium, an era whose defining character is licensed deception.</div>
+    <div class="row"><span class="lbl">Granted.</span> The seal and unseal contrast is real; &ldquo;time of the end&rdquo; is not the end of the world, granted across schools; and the Aramaic <em>dath</em> range (decree, law) is granted.</div>
+    <div class="row"><span class="lbl">Where it fails.</span> F6, F1, F4, F9. The time-limit is asserted, never located; no text gives preservation promises a terminus.</div>
+    <div class="row"><span class="lbl">What decides it, the structural marks of Revelation 20 that hold under a-mill, pre-mill, and post-mill alike.</span> Duration: the little season is brief, and the text&rsquo;s own sequence moves directly to the great white throne and the general resurrection (Revelation 20:11&ndash;15), then the new creation (21:1&ndash;2). The claim stretches it into an indefinite epoch of licensed text-corruption, an epoch the text does not give it. Object: the deception targets the nations, Gog and Magog, to gather them to battle, and they surround the camp of the saints, a war-deception of nations, never a text-corruption of the church&rsquo;s Scriptures. Named scope: Revelation 20:3 says deceive <em>the nations</em>, not the saints&rsquo; archive. The golden-age-referent leg is supporting only and does not survive amillennialism, under which the thousand years is the church age with no golden age at all; we do not rest the entry on it. The audience-location of Daniel 12 does the work the document skips: Daniel 12:7 defines &ldquo;the time of the end&rdquo; as the shattering of the holy people&rsquo;s covenant-order, and the partial-preterist mapping of that shattering to the AD 30 to 70 arc is a framework commitment, not a finding. The fallback, named in advance: if the Daniel 12:4 reply were shown to require the AD 70 reading entirely, we fall back to the structural Revelation 20 marks above, not to the golden-age referent. The seal and unseal contrast, properly located, marks imminence of fulfillment, not a permission-structure for manuscript alteration: Daniel&rsquo;s horizon was centuries distant for Daniel&rsquo;s audience, so seal it, and John&rsquo;s horizon was imminent, so do not. And the document&rsquo;s own confession at the engine room: &ldquo;the time of the end is <em>probably</em> right now.&rdquo; Probably. The word carrying the entire permission structure is a probability guess, Tier 3 at the joint where everything else hangs.</div>
+    <div class="row"><span class="lbl">Tier.</span> Document: Tier 3, its own &ldquo;probably.&rdquo; Counter: Tier 1 on Revelation 20:3, 7&ndash;9&rsquo;s own wording and on Revelation 1:3&rsquo;s imminence; the AD 70 mapping and any golden-age-referent argument are commitments or supporting notes, labeled as such.</div>
+    <div class="row"><span class="lbl">Verdict.</span> The engine fails on Revelation 20&rsquo;s own terms: a brief war-deception of the nations is not an indefinite license to edit the church&rsquo;s Scriptures. That holds whether the reader is a-mill, pre-mill, or post-mill. &ldquo;Probably right now&rdquo; remains guesswork at the joint.</div>
+  </div>
+</section>
+
+<!-- ============================ PART 6 ============================ -->
+<section class="section pb">
+  <h2 class="sec">6 &middot; The Incoherence Ledger</h2>
+  <p>Presented on its own, because the reader should watch the system eat itself without our help.</p>
+  <ul>
+    <li><strong>I-1.</strong> Claim 17 versus claim 23. The document argues Psalm 12 is not a preservation promise, then uses Psalm 12:6&ndash;7 as its first preservation promise in the modifier table. The author concedes the pairing is for illustration. The flagship scripture-modifies-scripture example modifies nothing.</li>
+    <li><strong>I-2.</strong> Claim 3 versus the epistemology. The document locates the settled word in heaven, yet the opening claim is that we have hidden the unchanged word in our hearts prior to the changes. If the only preserved location is heaven, the heart-copy is either delivered from heaven by some verifiable means, or taken from the now-corrupted book. The epistemology borrows what the theology denies.</li>
+    <li><strong>I-3.</strong> Memory versus the document&rsquo;s own judgment-texts. The detector is memory plus community consensus, and the document cites 2 Thessalonians 2:9&ndash;11 as its own permission-text, never noticing that the deluded faculty in its theology is the exact faculty it trusts as the detector. Jeremiah 17:9 is never quoted in forty-nine pages.</li>
+    <li><strong>I-4.</strong> The judgment&rsquo;s scale versus its subtlety. The document calls this a Babel-scale divine judgment on a Bible-idolizing church, while also reassuring readers that many of the changes are still fairly subtle and the general meaning of the text is intact. A judgment designed to be nearly undetectable by the very people judged inverts every judgment-pattern in Scripture, where the point is that the judged know it.</li>
+    <li><strong>I-5.</strong> &ldquo;We can work around it&rdquo; versus &ldquo;all bets are off.&rdquo; The opening says we can easily work around the changes; the closing says all bets are off and all promises of preservation have been rescinded. Workable confidence and total rescission cannot both be the operating posture.</li>
+    <li><strong>I-6.</strong> Revelation 22:18 used both ways. The warning proves alteration is a real transgression, and the unsealing licenses the alteration. The same verse functions as both barrier and permission, the tell of an unfalsifiable system.</li>
+    <li><strong>I-7.</strong> The load-bearing chronology is asserted, not established. The claim that Psalm 119:89 was written approximately two hundred fifty years before Amos 8:11 rests on a Davidic dating of Psalm 119 that is debated, and a late dating would place Psalm 119 after Amos, reversing the argument. The engine-claim of claim 1 rests on an unstated scholarly commitment.</li>
+  </ul>
+</section>
+
+<!-- ============================ PART 7 ============================ -->
+<section class="section pb">
+  <h2 class="sec">7 &middot; The Consequences Ledger</h2>
+  <p>Fairness requires showing the fallout. The argument is not complete until the reader sees what the permission structure costs.</p>
+  <ul>
+    <li><strong>K1, the dominical and apostolic hermeneutic dissolves.</strong> The New Testament&rsquo;s arguments are verbal and grammatical, from quotes, tenses, and single words. If the text retroactively mutates, apostolic argumentation is unreconstructable and Scripture is emptied of content, not just authority. The dominical method fails first: Christ refuses the sword because the Scriptures must be fulfilled, and a text being silently rewritten underneath the reader cannot be a text events are said to fulfill. The claim to be more <em>sola scriptura</em> is exactly backwards; it removes the only shared object <em>sola scriptura</em> has.</li>
+    <li><strong>K2, epistemic relativism under the banner of sovereignty.</strong> Memory plus consensus as the criterion makes each group&rsquo;s experience canon, the move Gnosticism always makes: true knowledge resides in an inner or communal apprehension the text can no longer adjudicate. When Scripture and experience conflict, experience wins and Scripture is reinterpreted to fit.</li>
+    <li><strong>K3, a theology of an unstable testimony.</strong> The God of Titus 1:2 and Hebrews 6:18, who cannot lie and whose promises are oath-grounded, is replaced by a God whose covenant testimony itself is negotiable. The new birth&rsquo;s instrument becomes untrustworthy at the exact point it is relied upon.</li>
+    <li><strong>K4, pastoral fallout.</strong> Chronic doubt, epistemic anxiety, and dependency on the movement&rsquo;s consensus and leadership. The opening protest that the movement is not heretical pre-frames correction as attack, and the commercial apparatus (debate bookings, leader counseling, book cross-promotion) is noted once, without sneering. In the framework&rsquo;s own theology of ancestral corruption, the church is a sick bride being healed by the Great Physician, not a defendant being tricked, and healing proceeds by clarity, not by deepening the fog.</li>
+    <li><strong>K5, eschatological mislocation.</strong> On any reading that treats the little season as a present epoch of licensed text-corruption, the move stretches Revelation 20:7 past its duration and past its object, and it tends to remove the bodily hope, resurrection, judgment, and New Jerusalem, as the next thing on the calendar. We never drift to full preterism; the future certainties stand.</li>
+    <li><strong>K6, mission fallout.</strong> Evangelism requires a stable word: &ldquo;faith cometh by hearing, and hearing by the word of God&rdquo; (Romans 10:17), hearing what, exactly, if the word heard cannot be trusted to be the word given? And the church&rsquo;s liturgical life, the public reading cycle, the lectionary, the liturgy, is itself a communal textuality stronger than private memory, the assembly&rsquo;s memory-system. A changing text breaks the liturgy, which is the church&rsquo;s transmission par excellence.</li>
+    <li><strong>K7, the irony verdict.</strong> The document&rsquo;s two anchor judgment-texts, Amos 8:11 and 2 Thessalonians 2:10&ndash;11, both describe judgment on people who had the truth and rejected it, and both direct the remedy toward receiving and loving the truth as delivered. A movement whose founding premise is that the delivered text cannot be trusted is the population those warnings describe, not their vindication.</li>
+  </ul>
+</section>
+
+<!-- ============================ PART 8 ============================ -->
+<section class="section pb">
+  <h2 class="sec">8 &middot; The Empirical Challenge: The Survey</h2>
+  <p>This part is the direct answer to the live claim that a survey of pastors proves the Bible is changing. Its tone is the gentlest in the document, because the audience includes people who are genuinely shaken. Vivid collective memory is real and worth explaining, and the explanation is well documented. Healing by clarity, not by fog. We do not mock the experience.</p>
+  <div class="callout">
+    <span class="lbl">The one-line thesis</span>
+    <p>A memory survey can prove that memory differs. Only a text can prove that a text changed.</p>
+  </div>
+
+  <h3>What the Survey Measures</h3>
+  <p>The instrument is a Google Forms questionnaire fielded in late 2025, with thirty-one form responses, thirty marked pastor, deacon, or minister, and most fill-in items answered by thirty respondents. It has thirty-four items: twelve yes or no familiarity questions and twenty-two three-option fill-ins. The 660 fill-in rows are thirty people times twenty-two items, which is repeated measures, not 660 independent persons. The outreach used purchased lists of pastor emails, which is infrastructure, not a probability sample and not a response rate. The correct label is an exploratory web questionnaire with an incompletely documented recruitment process.</p>
+  <p>The questionnaire is a recognition instrument. It presents a verse frame and three options, and the respondent selects. It examines no physical copy. Therefore, by its own construction, it cannot establish a textual change; it can only establish what a group of people recalled. We state this once, cleanly, without condescension. It is not a trick. It is the definition of what the instrument is.</p>
+  <p>On the flagship item, Job 1:21, the published options are &ldquo;gave / hath taken away&rdquo; (keyed, 3.3%), &ldquo;giveth / taketh&rdquo; (96.7%), and &ldquo;hath given / shall take away&rdquo; (approximately zero). The document&rsquo;s own results page already says the remembered form has never existed in the King James Version. Two instruments circulate, the pastor form and a shorter international form, and they should not be pooled.</p>
+
+  <h3>The Alternate Explanation, and It Is Testable</h3>
+  <p>The claimant asks for a rational explanation of the unified misremembering. It exists, and it is testable, and it has four mechanisms.</p>
+  <p><strong>Shared sources produce convergent error.</strong> Human memory is reconstructive and socially shaped. Unified misremembering is exactly what shared exposure predicts, not a mystery, and not a different thing from individual misremembering in kind, only in scale.</p>
+  <p><strong>Version differences, not supernatural edits.</strong> The likely wrong answers correspond to wording in dominant modern versions and paraphrases, or to well-known quotations. Where the wrong answer matches a printed translation the respondent actually reads, the convergence is evidence of real, extant texts, not of a vanished original. This answers the exposure question directly: the respondent&rsquo;s constant exposure is to the liturgical, idiomatic, and version forms they produce, not only to the page they read.</p>
+  <p><strong>Proverbial, liturgical, and popular sources are documented, one correspondence per published wrong answer.</strong> The flagship is liturgy: the Job 1:21 couplet is the 1549 Book of Common Prayer burial office, and its 1604 witness still reads present-tense, while the 1611 lectern Job reads past and perfect, and the 1662 office conforms to the King James. Sister verses supply the rest: Luke 6:49&rsquo;s sand and winds come from Matthew 7:26; Mark 5:27&rsquo;s hem comes from Matthew 9:20; Luke 5:24&rsquo;s bed and walk comes from John 5:8. Translation-stream items come from the modern versions: Genesis 3:19&rsquo;s brow, John 1:41&rsquo;s Messiah, John 12:24&rsquo;s grain, Hebrews 6:1&rsquo;s elementary principles. Reception items come from art and hymnody: Isaiah 11:6&rsquo;s lion, which sits on the same page at verse 6c and verse 7 and is never paired with the lamb.</p>
+  <p><strong>Method matters.</strong> The instrument is an exploratory questionnaire from a purchased list, the international form opens with attitude items, and neither is a probability sample. Third options include nonce strings such as &ldquo;mat / dance,&rdquo; &ldquo;wild ox,&rdquo; and &ldquo;olive berry,&rdquo; so equiprobable one-in-three was already invalid, and the printed strings make it indefensible. Clustering is real on the flagship items and is not a property of the whole instrument; several items are majority correct. And the asserted average-misremembering baseline is a misapplication: the classic false-event study reported six of twenty-four participants in one personalized study, and its authors explicitly disclaimed any prevalence estimate, offering only an existence proof.</p>
+  <p>The key discovery is that the convergence points to real, living texts, versions, paraphrases, and songs, the opposite of a vanished cosmic original. The data, explained, indicts the thesis.</p>
+
+  <h3>The Category Error in the Inference</h3>
+  <p>Even granting every convergence, the leap to &ldquo;physical Bibles changed&rdquo; requires three things: that respondents originally memorized the now-lost text; that the present physical text differs from their memory; and that no version, paraphrase, or source explains it. The survey shows none of the three. It never compares physical documents, and it does not rule out sources. The decisive test remains Part 9: produce a physical or documentary witness of a change.</p>
+  <p>And the dominical frame is the answer to the causal claim itself. When Christ addressed error about Scripture, He named its cause: &ldquo;Do ye not therefore err, because ye know not the scriptures, neither the power of God?&rdquo; (Mark 12:24). The survey&rsquo;s respondents answered from the forms they had absorbed. The dominical category is <em>not knowing</em>, not the text changing.</p>
+
+  <h3>The Probability Claims, Audited</h3>
+  <p>The reported figure of 421 of 660, with a probability near one in ten to the fifty-sixth, is arithmetically defensible under an independent one-third model. The error is not the arithmetic. It is treating 660 answers from thirty people as 660 independent, equiprobable trials, when the alternatives were not equally attractive, the items shared structure, and the respondents were self-selected. A very small probability under a false model does not make a supernatural model probable; it shows the model fits badly. The separate one-in-ten-to-the-nineteenth figure is not reproducible from the described model, because the instrument had three options, not ten. And the sample of thirty qualifying responses from a purchased-email wave does not support a national prevalence estimate.</p>
+
+  <h3>The Falsifiable Turn</h3>
+  <div class="callout">
+    <p>He asks for an alternate explanation. It exists, and it is testable. Here it is. Now we ask him for what his claim actually requires: a before-and-after pair, one dated physical text or quotation whose reading has vanished from the whole tradition without distribution or lineage. That exhibit has never been produced. Until it is, the survey stands as a memory study, not a text study.</p>
+  </div>
+  <p>What this part does not do: it does not diagnose the claimant, it does not litigate tone, and it does not treat memory reports as nothing. It answers the instrument.</p>
+</section>
+
+<!-- ============================ PART 9 ============================ -->
+<section class="section pb">
+  <h2 class="sec">9 &middot; The Deciders</h2>
+  <p>Falsifiability, stated in both directions and on the record.</p>
+
+  <h3>What Would Decide for the Document</h3>
+  <p>All required, not any. The burden is his, stated in advance.</p>
+  <ol>
+    <li>A physical or documentary witness of retroactive alteration: a previously documented variant that changes meaning and appears simultaneously across the entire textual tradition, an alteration with no distribution and no copyist lineage. This exhibit has never been attempted.</li>
+    <li>An inspired text explicitly linking Daniel 7:25, Amos 8:11, or 2 Thessalonians 2:9 to the written Scripture. Not located.</li>
+    <li>An apostolic statement that preservation is not textual. Not located.</li>
+    <li>A prophet announcing the alteration before or as it happens, since God&rsquo;s judgment-pattern requires announcement (Amos 3:7). Not located; the movement&rsquo;s announcements are retroactive memory claims.</li>
+  </ol>
+
+  <h3>What Would Decide Against Us</h3>
+  <p>Produce one demonstrable retro-edit as described above: a single documented pre-change text, dated manuscript, quotation, or printed edition, whose reading has since vanished from every physical witness without distribution or lineage. Our position would then need revision, and we say so gladly. We are falsifiable. The document&rsquo;s interpretive framework is structured to absorb disconfirmation, and its empirical claim verbally invites disconfirmation while rejecting the available explanations in advance. That asymmetry is itself the argument.</p>
+  <p>A named fallback on claim 25: if the Daniel 12:4 response were shown to require the AD 70 reading entirely, or if the reader is amillennial and locates the little season in the present, we fall back to the structural marks of Revelation 20:3, 7&ndash;9, duration, object, and named scope, which require neither a golden-age referent nor the AD 70 mapping. And a watch item: if a critic argues that our broader canon is itself an admission of textual change, we answer with the three-category distinction in Part 2 and keep word-level variation, canonical extent, and alleged wording-edits separate.</p>
+
+  <h3>The Distribution Test, Stated Plainly</h3>
+  <p>Real variants have pedigrees: parent manuscripts, copy-lineages, and distribution patterns across families and eras. Retro-edits would have none. Memory-only discrepancies, with no physical witness anywhere, no lineage, and no distribution, are the signature of misremembering, not of alteration. The case does not need psychology to make this point; the physical record is decisive on its own.</p>
+  <p>And the honest limit, stated: we cannot prove a universal negative about the future. We prove that no text asserts present alteration, that the permission structure fails its own tests, and that the positive case stands. That is the whole task, and it is enough.</p>
+</section>
+
+<!-- ============================ PART 10 ============================ -->
+<section class="section pb">
+  <h2 class="sec">10 &middot; The Verdict and the Positive Case</h2>
+
+  <h3>The Verdict as Critique, Granted at Length</h3>
+  <p>The document succeeds as a critique of overreach. Psalm 12:6&ndash;7, Psalm 119:89&rsquo;s semantics, the word and Bible distinction, theological necessity as sentiment dressed as doctrine, and the verbal-plenary-preservation school. On these points it is right, most careful commentators agree with it, and this response says so first and plainly. The church&rsquo;s proof-text discipline on preservation has often been lazy, and the document caught it.</p>
+
+  <h3>The Verdict as Case, It Fails at Every Load-Bearing Joint</h3>
+  <p>The empirical premise is now asserted via the pastor survey, not established, and Part 8 answers that assertion. The engine is a modal collapse, one argument (God is sovereign, therefore anything is permissible) repeated with twenty-five sets of proof-texts. The mechanism is the unstated modifier, pairings that no text authorizes, voiding promises by reader-fiat, a mechanism with no stopping point before the gospel. The clock is audience-evacuated, &ldquo;probably right now.&rdquo; And the epistemology self-collapses: memory and consensus trusted at the exact point the document&rsquo;s own judgment-texts warn they are deluded.</p>
+
+  <h3>The Positive Case</h3>
+  <p>The refutation does not end in negation. These affirmations stand, and none of them depends on the concessions above.</p>
+  <ol>
+    <li><strong>The dominical and apostolic method.</strong> Christ treated the written Scriptures as determinate, fulfillable, and exegetable: &ldquo;the scriptures must be fulfilled&rdquo; (Matthew 26:54); error about them is ignorance of them (Mark 12:24); He expounded all the scriptures concerning Himself (Luke 24:27); &ldquo;the scripture cannot be broken&rdquo; (John 10:35). And &ldquo;It is written,&rdquo; the church&rsquo;s birth-argument, is quotation from a stable text.</li>
+    <li><strong>The oath-class promise.</strong> Numbers 23:19; 1 Samuel 15:29 with 15:11 in the same chapter; Ezekiel 24:14; Malachi 3:6; Titus 1:2; Hebrews 6:17&ndash;18. Psalm 89:34 as supporting, with 89:38&ndash;39 quoted in the same breath so the sequel cannot be sprung.</li>
+    <li><strong>The dominical saying without a terminus.</strong> &ldquo;Heaven and earth shall pass away, but my words shall not pass away&rdquo; (Matthew 24:35).</li>
+    <li><strong>The supporting witness.</strong> First Peter 1:23&ndash;25, Isaiah 40:8 applied by Peter to the gospel preached. Transmission, not a manuscript clause.</li>
+    <li><strong>The sanction&rsquo;s presupposition.</strong> Revelation 22:18&ndash;19 and Deuteronomy 4:2 and 12:32: the warning is meaningful because the words are fixed, and the blessing of Revelation 1:3 rests on a readable, copyable book.</li>
+    <li><strong>The transmission record.</strong> The Great Isaiah Scroll and the medieval Hebrew text stand substantially together across the centuries, with their variants catalogued, not concealed. The Enoch sections attested at Qumran confirm long Ge&rsquo;ez transmission of those sections. Variants have pedigrees, and the archive is recoverable.</li>
+    <li><strong>The liturgical memory.</strong> The church&rsquo;s public reading cycle, the community&rsquo;s memory-system, stronger than any private recollection, running for two millennia.</li>
+  </ol>
+
+  <div class="scripture">
+    <p>&ldquo;The grass withereth, the flower fadeth: but the word of our God shall stand for ever.&rdquo;</p>
+    <cite>Isaiah 40:8, and this is the word which by the gospel is preached unto you (1 Peter 1:25)</cite>
+  </div>
+  <p>The book that records its own revisions, survives its own judgments, and carries its critics&rsquo; verses intact across twenty centuries is not being edited. It is standing.</p>
+  <div class="verdict"><b>THE PHENOMENON IS REAL.</b> &nbsp; The paradigm is contested. &nbsp; The text says what it says. &nbsp; Start there.</div>
+</section>
+
+<!-- ============================ APPENDICES ============================ -->
+<section class="section pb">
+  <h2 class="sec">Appendices</h2>
+
+  <h3>Appendix A &middot; The Textual Traditions Quick Card</h3>
+  <p>Multi-witness. No default winner. No priority tier. Weighed per passage by evidence.</p>
+  <ul>
+    <li><strong>Masoretic Text.</strong> The Hebrew strand; consonantal text standardized roughly the first and second centuries CE, with vowel-pointing and accents fixed later. Valued; one strand, not the arbiter.</li>
+    <li><strong>Septuagint.</strong> The Greek Old Testament, Alexandria, around 280 BC, the Apostles&rsquo; Bible, quoted throughout the New Testament. Weighted where it preserves older readings (Deuteronomy 32:8; Hebrews 10:5 with Psalm 40:6). A corpus of varied translations, not a single uniform text.</li>
+    <li><strong>Dead Sea Scrolls.</strong> Pre-Christian manuscripts, decisive per case, not broadly. Deuteronomy 32:8, &ldquo;sons of God&rdquo; in 4QDeut-j supporting the Septuagint against the Masoretic &ldquo;sons of Israel.&rdquo;</li>
+    <li><strong>Ethiopian Orthodox Tewahedo canon, eighty-one books, Ge&rsquo;ez.</strong> The broadest canonical tradition, the breadth default only, never a reading trump. Preserves 1 Enoch and Jubilees entire; Qumran confirms long Ge&rsquo;ez transmission of the sections it attests; the Similitudes have no Qumran witness.</li>
+    <li><strong>Peshitta and Old Syriac.</strong> Early transmission witness, consulted for reading history.</li>
+  </ul>
+  <p>Why this matters here: the supernatural-changes claim must survive all witnesses simultaneously, and it has never been tested against even one.</p>
+
+  <h3>Appendix B &middot; Glossary</h3>
+  <p>Supernatural Bible Changes (the movement under review) &middot; Mandela Effect &middot; Verbal-Plenary Preservation &middot; theological necessity &middot; providential preservation &middot; law of first mention &middot; modality (can, could, may, is, did) &middot; Tier 1 to 4 &middot; steelman &middot; distribution (text-critical) &middot; variant and copyist lineage &middot; finding versus commitment &middot; documented change versus retroactive edit &middot; multi-witness &middot; <em>davar</em>, <em>logos</em>, <em>graphe</em>, <em>dath</em>, <em>natsab</em>, <em>paradosis</em> &middot; partial preterism &middot; the Two Comings &middot; little season &middot; <em>sunteleia</em> &middot; audience relevance.</p>
+
+  <h3>Appendix C &middot; The Documented-Variant Catalogue</h3>
+  <p>The counter-exhibit. Every famous Bible misprint has a date, a printer, a shelfmark, and a page image, the pedigree the supernatural-changes claim never has.</p>
+  <table>
+    <caption>What a real textual change looks like</caption>
+    <thead><tr><th>Variant</th><th>Reading</th><th>Witness</th></tr></thead>
+    <tbody>
+      <tr><td class="k">1611 &ldquo;He/She&rdquo;</td><td>Ruth 3:15, &ldquo;he went&rdquo; in the first printing, &ldquo;she went&rdquo; in the later</td><td>Robert Barker, London, 1611; Queens&rsquo; College Old Library, R.1.1</td></tr>
+      <tr><td class="k">1631 &ldquo;Wicked&rdquo;</td><td>Exodus 20:14, the &ldquo;not&rdquo; omitted</td><td>Barker and the assigns of John Bill, 1631; STC 2296; British Library C.24.a.41</td></tr>
+      <tr><td class="k">1653 &ldquo;Unrighteous&rdquo;</td><td>1 Corinthians 6:9, &ldquo;shall inherit&rdquo; for &ldquo;shall not inherit&rdquo;</td><td>John Field, London, 1653; ESTC R175288; Alexander Turnbull Library</td></tr>
+      <tr><td class="k">1717 &ldquo;Vinegar&rdquo;</td><td>Luke 20:9 heading, &ldquo;Vinegar&rdquo; for &ldquo;Vineyard&rdquo;</td><td>John Baskett, Oxford, 1717; Bridwell Library; Royal Collection Trust 1052106</td></tr>
+    </tbody>
+  </table>
+  <p>These are copy-detectable differences within a printing or edition, and the church catalogued them all. The claim requires meaning-changing alterations with no distribution and no lineage across every tradition at once, which is not what a textual change looks like. Real change leaves fingerprints. The claimed change leaves none, and then treats the absence of fingerprints as the proof of the crime.</p>
+
+  <h3>Appendix D &middot; The Book of Common Prayer Job 1:21 Chronology</h3>
+  <p>The flagship historical exhibit. Page images inspected.</p>
+  <table>
+    <caption>The same verse in two authorized English forms</caption>
+    <thead><tr><th>Witness</th><th>The clause</th><th>Form</th><th>Grade</th></tr></thead>
+    <tbody>
+      <tr><td class="k">1549 BCP, Burial Office</td><td>&ldquo;The Lord geueth, and the Lord taketh awaye&rdquo;</td><td>present</td><td><span class="tag iv">IV</span></td></tr>
+      <tr><td class="k">1604 BCP, Burial Office</td><td>&ldquo;The Lord giueth, and the Lorde taketh away&rdquo;</td><td>present</td><td><span class="tag t">T</span></td></tr>
+      <tr><td class="k">1611 KJV, Job 1:21</td><td>&ldquo;the LORD gaue, and the LORD hath taken away&rdquo;</td><td>past / perfect</td><td><span class="tag iv">IV</span></td></tr>
+      <tr><td class="k">1662 BCP, Burial Office</td><td>&ldquo;The Lord gaue, and the Lord hath taken away&rdquo;</td><td>past / perfect</td><td><span class="tag iv">IV</span></td></tr>
+    </tbody>
+  </table>
+  <p class="small">Grade IV denotes a reading inspected directly on the dated leaf. Grade T denotes transcription-verified against a dated record. The 1604 blackletter interior is near-indistinguishable from a 1552 or 1559 on a single leaf, so it is filed at T rather than IV.</p>
+  <p>The controlled conclusion: the present-tense formula is fixed in the inspected 1549 witness and by transcription in the 1604, and the past and perfect formula is fixed in the inspected 1662 witness and the 1611 lectern leaf. The transition occurred after the inspected 1604 witness and by the inspected 1662 witness. The evidence establishes a composite English liturgical sentence linked on the page to 1 Timothy 6 and Job 1, not a Hebrew variant, not a King James revision, and not the individual source of any respondent&rsquo;s memory. It answers the &ldquo;where did they all see the same wording&rdquo; question with a documented pre-King-James liturgy, and it is exactly the pattern the memory model predicts.</p>
+
+  <figure class="plate">
+    <img src="images/exhibit-d-1611-kjv-job-1-21.jpg" alt="1611 King James Bible, Job 1:21, signature Z3">
+    <figcaption>Exhibit D, 1611 King James, Job 1:21, signature Z3. The lectern reading: &ldquo;the LORD gaue, and the LORD hath taken away.&rdquo; The office said giveth; the page said gave.</figcaption>
+  </figure>
+
+  <figure class="plate">
+    <img src="images/exhibit-a-1549-bcp-burial.jpg" alt="1549 Book of Common Prayer, burial office, folio xxviii">
+    <figcaption>Exhibit A, 1549 Book of Common Prayer, burial office, folio xxviii. &ldquo;The Lord geueth, and the Lord taketh awaye,&rdquo; present tense, sixty-two years before the King James Bible.</figcaption>
+  </figure>
+
+  <figure class="plate">
+    <img src="images/exhibit-b-1604-bcp-burial.jpg" alt="1604-tradition Book of Common Prayer, burial office, present tense">
+    <figcaption>Exhibit B, 1604-tradition Book of Common Prayer, burial office. &ldquo;The Lord giueth, and the Lorde taketh away,&rdquo; still present tense, with the 1 Timothy 6 and Job 1 margins. Graded T: a single interior leaf of this family cannot be distinguished from a 1552 or 1559 without a title page.</figcaption>
+  </figure>
+
+
+  <figure class="plate">
+    <img src="images/exhibit-c-1662-bcp-burial.jpg" alt="1662 Book of Common Prayer, burial office, signature Dd2">
+    <figcaption>Exhibit C, 1662 Book of Common Prayer, burial office, signature Dd2. &ldquo;The Lord gaue, and the Lord hath taken away,&rdquo; the office conformed to the lectern text.</figcaption>
+  </figure>
+
+  <figure class="plate">
+    <img src="images/exhibit-g-1611-kjv-isaiah-11.jpg" alt="1611 King James Bible, Isaiah 11">
+    <figcaption>Exhibit G, 1611 King James, Isaiah 11. &ldquo;The Wolfe also shall dwell with the lambe &hellip; and the yong lion.&rdquo; The lion is on the page, never paired with the lamb.</figcaption>
+  </figure>
+
+  <figure class="plate">
+    <img src="images/exhibit-e-1611-kjv-genesis-7.jpg" alt="1611 King James Bible, Genesis 7-8">
+    <figcaption>Exhibit E, 1611 King James, Genesis 7&ndash;8. &ldquo;there went in two and two unto Noah into the Arke.&rdquo;</figcaption>
+  </figure>
+
+  <h3>Appendix E &middot; The Distribution Table</h3>
+  <p>The artifact that answers the survey&rsquo;s method question. Each item is tagged by mechanism family, ritual and cultural salience, study frequency, delta type, and whether the wording is attested in a datable non-biblical source.</p>
+  <table>
+    <caption>The twelve items, by mechanism</caption>
+    <thead><tr><th>Item</th><th>Remembered form</th><th>KJV form</th><th>Delta type</th><th>Datable source</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Job 1:21</td><td>giveth / taketh</td><td>gave / hath taken</td><td>Tense-shift, proverbial</td><td>BCP 1549 and 1662, image-verified</td></tr>
+      <tr><td class="k">Luke 6:49</td><td>sand / winds</td><td>earth / stream</td><td>Parallel substitution</td><td>Matthew 7:26</td></tr>
+      <tr><td class="k">Genesis 3:19</td><td>sweat of thy brow</td><td>sweat of thy face</td><td>Idiomatic paraphrase</td><td>NIV; Lincoln (1847), Wayland (1837), on the KJV wording</td></tr>
+      <tr><td class="k">Mark 5:27&ndash;28</td><td>hem of his garment</td><td>garment / clothes</td><td>Parallel harmonization</td><td>Matthew 9:20; Luke 8:44; a manuscript variant at Mark 5:27</td></tr>
+      <tr><td class="k">Luke 5:24</td><td>bed / walk</td><td>couch / go home</td><td>Parallel harmonization</td><td>John 5:8; Mark 2:11</td></tr>
+      <tr><td class="k">Genesis 7:9</td><td>two by two</td><td>two and two</td><td>Idiomatic</td><td>NKJV; children&rsquo;s material</td></tr>
+      <tr><td class="k">Isaiah 11:6</td><td>lion / lamb</td><td>wolf / lamb</td><td>Compression, symbol</td><td>Hicks paintings (1830s); Dorsey hymn (1937)</td></tr>
+      <tr><td class="k">John 1:41</td><td>Messiah</td><td>Messias</td><td>Translation update</td><td>Modern versions</td></tr>
+      <tr><td class="k">Matthew 7:1</td><td>lest</td><td>that ye be not judged</td><td>Idiomatic compression</td><td>Modern paraphrase</td></tr>
+      <tr><td class="k">Hebrews 6:1</td><td>elementary principles</td><td>principles of the doctrine</td><td>Translation update</td><td>NKJV, ESV</td></tr>
+      <tr><td class="k">John 12:24</td><td>grain</td><td>corn</td><td>Lexical modernization</td><td>Modern versions</td></tr>
+      <tr><td class="k">Genesis 8:11</td><td>olive branch</td><td>olive leaf</td><td>Cultural symbol</td><td>Douay-Rheims (1609); peace iconography</td></tr>
+    </tbody>
+  </table>
+  <p>Reading of the table: the deltas cluster on high-salience, low-study items and are mostly additive or idiomatic, not theologically tendentious. A text-change model predicts the opposite distribution, and it predicts the most drift on the most-read verses. The observed pattern is the memory model&rsquo;s signature. And the kill shot, empirical and not theological: a large share of the broader &ldquo;changed verses&rdquo; in popular lists were never in the Bible at all, which is inexplicable under a text-change model, since you cannot remember a wording that was removed if it was never there, and trivial under a memory model, since a maxim delivered in a biblical register is simply filed as something holy one has heard many times. Tell him to run it on his own list. That is a frequency table, not philosophy.</p>
+
+  <h3>Appendix F &middot; Integrity Rules for Drafting</h3>
+  <ul>
+    <li>Quote the document verbatim, with page cites. Never paraphrase an opponent into weakness.</li>
+    <li>Concessions once granted stay granted. No re-litigating them later.</li>
+    <li>No speculation about the author&rsquo;s motives, sincerity, or finances beyond what the document itself displays. Note the commercial apparatus once, neutrally.</li>
+    <li>Tone: the document&rsquo;s rhetoric is data; ours is discipline. No reciprocation.</li>
+    <li>Any citation that cannot be verified is cut, never reconstructed. Never invent a page number.</li>
+    <li>Scripture quotations use the King James Version as the working text. Non-King-James readings are flagged as variants.</li>
+    <li>If any counter-claim is found to misstate a text, correct it in the next installment, on the record.</li>
+    <li>The personal revision is stated once, plainly, and not milked.</li>
+    <li>The series ends on Christ and the standing word, not on our competence.</li>
+    <li>Findings and framework-commitments stay in separate registers. Do not preach the multi-witness weighting, the Ethiopian breadth default, the partial-preterist Daniel 12 reading, or the little-season reading as Tier 1 conclusions.</li>
+    <li>Do not answer the man; answer the claims.</li>
+    <li>Do not let the empirical challenge go unanswered.</li>
+  </ul>
+
+  <h3>Appendix G &middot; Verse Index</h3>
+  <p><strong>Dominical texts on the written Scriptures</strong> (Tier 1 for what Christ does with the text, Tier 2 for the stability inference; none is a preservation promise): Matthew 26:54; Mark 12:24; Luke 24:27; John 10:35; compare Matthew 5:17&ndash;18 (stated terminus) and Matthew 24:35.</p>
+  <p><strong>The document&rsquo;s cited texts</strong> are steelmanned in place at each of the twenty-five claims and are not re-listed here.</p>
+  <p><strong>Our counter-texts, Tier 1 core:</strong> Numbers 23:19; 1 Samuel 15:11, 29; Ezekiel 24:14; Malachi 3:6; Titus 1:2; Hebrews 6:17&ndash;18; Matthew 24:35; Isaiah 40:8; Psalm 89:34&ndash;37 with 38&ndash;39 and 52; Revelation 22:18&ndash;19 with Deuteronomy 4:2 and 12:32; Revelation 1:3; Exodus 24:4; 17:14; Jeremiah 30:2; Habakkuk 2:2; Luke 4:17; Romans 9:17; 10:17; 2 Thessalonians 2:15; 3:17; Jude 3; 1 Corinthians 15:3; 11:23; Galatians 6:11; 3:16; Matthew 22:31&ndash;32; Isaiah 8:20; Amos 3:7; Jeremiah 17:9; Deuteronomy 29:29; 8:3; 30:11&ndash;14; 31:26; 2 Timothy 1:13; 3:14&ndash;15; Jeremiah 36:32; 2 Kings 22; Daniel 9:2; Job 38&ndash;42 and 42:7; Genesis 22:8, 13&ndash;14; Hebrews 11:19; Isaiah 29:11&ndash;12; Daniel 8:11; Colossians 2:16&ndash;17; Mark 7:19; Acts 10:15; Jeremiah 32:14; Isaiah 54:9&ndash;10; 1 Corinthians 14:40.</p>
+  <p><strong>Tier 2 and supporting:</strong> 1 Peter 1:23&ndash;25 (gospel in transmission); the Psalm 119 reader-verbs (Torah, not the closed canon); Daniel 12:7&rsquo;s definition with the AD 70 mapping tagged as commitment; the Great Isaiah Scroll against the Masoretic text (substantially verbatim); 4QDeut-j for Deuteronomy 32:8; the Enoch correspondence (book-dependent, illustration only); the transmission record generally.</p>
+</section>
+
+</div>
+</body>
+</html>
