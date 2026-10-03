@@ -2,28 +2,35 @@
 
 Public text of *The Text Stands*, a response to *25 Theological Reasons To Consider Supernatural Bible Changes*.
 
-Published by Liberty Through Truth Foundation. September 2026.
+Published by Liberty Through Truth Foundation. October 2026.
 
 ## About this repository
 
-This repository contains the full response, a shorter companion brief, print-ready PDFs, and the exhibit images used in the web documents. The materials address the theological brief and the survey discussed in that brief; they respond to the documents and claims, not to a person.
+This repository publishes the full response, *The Text Stands v2.03*, its shorter companion brief, and the exhibit images used in the HTML documents. The materials address the theological brief and survey discussed below; they respond to the documents and claims, not to a person.
+
+The current full response is available as HTML. The previous full-response PDF was the v2.02 edition and has been removed so it is not mistaken for a v2.03 print edition. A new full-response PDF is not included; readers can create one from the HTML using the instructions below. The separate Brief 1.1 PDF remains available.
 
 ## Reading guide
 
-For a concise introduction, start with **Brief 1.1**. For the full treatment and supporting exhibits, continue with **The Text Stands v2.02**.
+For a concise introduction, start with **Brief 1.1**. For the full treatment and supporting exhibits, read **The Text Stands v2.03**.
 
 | Document | Format | Description |
 |---|---|---|
 | [Brief 1.1](brief.html) | HTML | Short companion overview. |
-| [The Text Stands v2.02](index.html) | HTML | Full response. |
+| [The Text Stands v2.03](index.html) | HTML | Full response and GitHub Pages homepage. |
+| [The Text Stands v2.03 — versioned HTML file](The-Text-Stands-Refutation-v2.03.html) | HTML | Same full response under its corrected versioned filename. |
 | [Brief 1.1 — PDF](pdf/the-text-stands-brief.pdf) | PDF | Print/offline edition of the companion brief (11 pages). |
-| [The Text Stands v2.02 — PDF](pdf/the-text-stands.pdf) | PDF | Print/offline edition of the full response (42 pages). |
 
-### Viewing on GitHub
+## How to view or make a PDF
 
-- **PDFs:** Open a PDF link above to preview it in GitHub, or download it for offline reading or printing.
-- **HTML:** GitHub’s file view shows HTML source rather than rendering the page. Before Pages is enabled, download the repository (or its ZIP), keep the `images/` folder beside the HTML files, and open `index.html` or `brief.html` in a web browser.
-- **After Pages is enabled:** The full response will appear at the site homepage; the brief will be at `/brief.html`.
+GitHub’s file view displays HTML source rather than rendering it as a web page. To read the full response locally or save it as a PDF:
+
+1. Download the repository ZIP from GitHub (**Code → Download ZIP**) and unzip it. You can also clone the repository.
+2. Keep the `images/` folder beside `index.html`; the document uses those local image paths.
+3. Open `index.html` in a modern browser such as Chrome, Edge, or Firefox. Check that the exhibit images appear.
+4. Choose **Print** (`Ctrl+P` on Windows/Linux or `⌘P` on macOS), then select **Save as PDF** as the destination. The document’s print stylesheet sets letter-size pages. Enable background graphics if you want the shaded callouts and visual styling included.
+
+If GitHub Pages is enabled later, the site can also be opened in a browser and printed from there. Pages is **not enabled yet**, so the local-download method works now.
 
 ## Exhibit images
 
@@ -36,7 +43,7 @@ The six plates in [`images/`](images/) are referenced from the HTML documents:
 - Exhibit E — 1611 King James Bible, Genesis 7
 - Exhibit G — 1611 King James Bible, Isaiah 11
 
-Keep the `images/` directory in place when downloading the repository to read the HTML locally, so the document image links continue to work.
+Keep the `images/` directory in place when downloading the repository to read or print the HTML locally.
 
 ## Sources under review
 
@@ -48,24 +55,17 @@ Keep the `images/` directory in place when downloading the repository to read th
 ```text
 .
 ├── README.md
-├── index.html
-├── brief.html
-├── images/                       # Six exhibit plates
+├── index.html                            # Full response v2.03 / Pages homepage
+├── The-Text-Stands-Refutation-v2.03.html # Versioned copy of index.html
+├── brief.html                            # Companion Brief 1.1
+├── images/                               # Six exhibit plates
 └── pdf/
-    ├── the-text-stands.pdf       # Full response, 42 pages
-    └── the-text-stands-brief.pdf # Companion brief, 11 pages
+    └── the-text-stands-brief.pdf         # Companion brief, 11 pages
 ```
 
 ## GitHub Pages
 
-**GitHub Pages is not enabled yet.** This is a public repository, and `index.html` is already at the root, so a basic static site can be served directly without a site generator or custom build.
-
-A repository administrator can enable it in GitHub:
-
-1. Open **Settings → Pages** for this repository.
-2. Under **Build and deployment**, choose **Deploy from a branch**.
-3. Select branch **`main`** and folder **`/(root)`**, then save.
-4. Wait for the initial deployment. GitHub will show the deployment status and site URL in Pages settings.
+The repository is public, and `index.html` is at the root, so the site can be served without a custom build. **GitHub Pages is not enabled yet.** A repository administrator can enable it under **Settings → Pages** by selecting **Deploy from a branch**, branch **`main`**, folder **`/(root)`**, then saving. GitHub will show the first deployment’s status in Pages settings.
 
 Once published, the full response will be at the expected URL below; the companion brief will be at `https://libertythroughtruthfoundation.github.io/the-text-stands/brief.html`.
 
