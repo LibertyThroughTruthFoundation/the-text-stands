@@ -8,29 +8,32 @@ Published by Liberty Through Truth Foundation. October 2026.
 
 This repository publishes the full response, *The Text Stands v2.03*, its shorter companion brief, and the exhibit images used in the HTML documents. The materials address the theological brief and survey discussed below; they respond to the documents and claims, not to a person.
 
-The current full response is available as HTML. The previous full-response PDF was the v2.02 edition and has been removed so it is not mistaken for a v2.03 print edition. A new full-response PDF is not included; readers can create one from the HTML using the instructions below. The separate Brief 1.1 PDF remains available.
+The companion brief has been updated to **Brief 1.2** to match the full response’s October 2026 self-description. The repository includes PDFs generated from both current HTML documents. These are browser-printed editions; pagination may vary with the browser or print engine used.
 
 ## Reading guide
 
-For a concise introduction, start with **Brief 1.1**. For the full treatment and supporting exhibits, read **The Text Stands v2.03**.
+For a concise introduction, start with **Brief 1.2**. For the full treatment and supporting exhibits, read **The Text Stands v2.03**.
 
 | Document | Format | Description |
 |---|---|---|
-| [Brief 1.1](brief.html) | HTML | Short companion overview. |
+| [Brief 1.2](brief.html) | HTML | Short companion overview, aligned with full response v2.03. |
 | [The Text Stands v2.03](index.html) | HTML | Full response and GitHub Pages homepage. |
 | [The Text Stands v2.03 — versioned HTML file](The-Text-Stands-Refutation-v2.03.html) | HTML | Same full response under its corrected versioned filename. |
-| [Brief 1.1 — PDF](pdf/the-text-stands-brief.pdf) | PDF | Print/offline edition of the companion brief (11 pages). |
+| [The Text Stands v2.03 — PDF](pdf/the-text-stands.pdf) | PDF | Print/offline edition of the full response (55 pages). |
+| [Brief 1.2 — PDF](pdf/the-text-stands-brief.pdf) | PDF | Print/offline edition of the companion brief (18 pages). |
 
-## How to view or make a PDF
+## How to view or make PDFs
 
-GitHub’s file view displays HTML source rather than rendering it as a web page. To read the full response locally or save it as a PDF:
+GitHub’s file view displays HTML source rather than rendering it as a web page. To read either HTML document locally or create a PDF from the current HTML:
 
 1. Download the repository ZIP from GitHub (**Code → Download ZIP**) and unzip it. You can also clone the repository.
-2. Keep the `images/` folder beside `index.html`; the document uses those local image paths.
-3. Open `index.html` in a modern browser such as Chrome, Edge, or Firefox. Check that the exhibit images appear.
-4. Choose **Print** (`Ctrl+P` on Windows/Linux or `⌘P` on macOS), then select **Save as PDF** as the destination. The document’s print stylesheet sets letter-size pages. Enable background graphics if you want the shaded callouts and visual styling included.
+2. Keep the `images/` folder beside `index.html` and `brief.html`; the documents use those local image paths.
+3. Open `index.html` for the full response or `brief.html` for Brief 1.2 in a modern browser such as Chrome, Edge, or Firefox. Check that the exhibit images appear.
+4. Choose **Print** (`Ctrl+P` on Windows/Linux or `⌘P` on macOS), then select **Save as PDF** as the destination. The print stylesheet sets letter-size pages. Enable background graphics if you want the shaded callouts and visual styling included.
 
-If GitHub Pages is enabled later, the site can also be opened in a browser and printed from there. Pages is **not enabled yet**, so the local-download method works now.
+The PDFs included here were generated from the corresponding HTML using Chromium. Other browsers and print engines may paginate the documents differently.
+
+The live GitHub Pages site can also be opened in a browser and printed directly. The HTML source on GitHub remains available for download.
 
 ## Exhibit images
 
@@ -57,19 +60,18 @@ Keep the `images/` directory in place when downloading the repository to read or
 ├── README.md
 ├── index.html                            # Full response v2.03 / Pages homepage
 ├── The-Text-Stands-Refutation-v2.03.html # Versioned copy of index.html
-├── brief.html                            # Companion Brief 1.1
+├── brief.html                            # Companion Brief 1.2
 ├── images/                               # Six exhibit plates
 └── pdf/
-    └── the-text-stands-brief.pdf         # Companion brief, 11 pages
+    ├── the-text-stands.pdf               # Full response v2.03
+    └── the-text-stands-brief.pdf         # Companion brief, 18 pages
 ```
 
 ## GitHub Pages
 
-The repository is public, and `index.html` is at the root, so the site can be served without a custom build. **GitHub Pages is not enabled yet.** A repository administrator can enable it under **Settings → Pages** by selecting **Deploy from a branch**, branch **`main`**, folder **`/(root)`**, then saving. GitHub will show the first deployment’s status in Pages settings.
+GitHub Pages is **live** and deployed from branch **`main`**, folder **`/(root)`**, over HTTPS. The full response is the homepage; the companion brief is available at `/brief.html`.
 
-Once published, the full response will be at the expected URL below; the companion brief will be at `https://libertythroughtruthfoundation.github.io/the-text-stands/brief.html`.
-
-If GitHub does not offer the Pages options, check whether the organization restricts Pages sites and verify that the signed-in account has repository administrator access.
+The live homepage is at the URL below; the companion brief is at `https://libertythroughtruthfoundation.github.io/the-text-stands/brief.html`.
 
 Expected URL:
 
